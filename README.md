@@ -1,6 +1,6 @@
 # simak_uin_suka
 
-A new Flutter project.
+Project Tugas Mata Kuliah MPPL
 
 ## Getting Started
 
