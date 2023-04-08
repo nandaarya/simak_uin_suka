@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  // WidgetsFlutterBinding.ensureInitialized();
   // await EasyLocalization.ensureInitialized();
 
   runApp(MyApp());
@@ -20,14 +20,15 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.orange,
         ),
-        initialRoute: '/',
         debugShowCheckedModeBanner: false,
-        routes: {
-          // '/': (context) => SplashPage(),
-          // '/signIn_page': (context) => SignInPage(),
-          // '/main_page': (context) => MainPage(),
-          // '/nasabah_search_page': (context) => CustomerSearchPage(),
-          // '/news_search_page': (context) => NewsSearchPage(),
-        });
+        // initialRoute: '/',
+        // routes: {
+        //   '/': (context) => SplashPage(),
+        //   '/signIn_page': (context) => SignInPage(),
+        //   '/main_page': (context) => MainPage(),
+        //   '/nasabah_search_page': (context) => CustomerSearchPage(),
+        //   '/news_search_page': (context) => NewsSearchPage(),
+        // }
+        );
   }
 }
