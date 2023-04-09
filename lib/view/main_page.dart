@@ -29,6 +29,12 @@ class _MainPageState extends State<MainPage> {
       },
       child: Scaffold(
         body: widgets[currentIndex],
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          backgroundColor: Colors.green,
+          child: Icon(Icons.add),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         bottomNavigationBar: ConvexAppBar(
             style: TabStyle.textIn,
             backgroundColor: primaryColor,
