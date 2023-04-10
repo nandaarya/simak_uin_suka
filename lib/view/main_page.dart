@@ -31,8 +31,8 @@ class _MainPageState extends State<MainPage> {
         body: widgets[currentIndex],
         floatingActionButton: FloatingActionButton(
           onPressed: () {},
-          backgroundColor: Colors.green,
-          child: Icon(Icons.add),
+          backgroundColor: secondaryColor,
+          child: const Icon(Icons.add, color: Colors.white,),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         bottomNavigationBar: ConvexAppBar(
