@@ -106,7 +106,7 @@ class _HomePageState extends State<HomePage> {
                       margin: EdgeInsets.only(
                         bottom: defaultMargin
                       ),
-                      height: 140,
+                      height: 160,
                       width: widthDevice,
                       decoration: BoxDecoration(
                           color: primaryColor, borderRadius: BorderRadius.circular(12)),
@@ -123,6 +123,7 @@ class _HomePageState extends State<HomePage> {
                                 children: [
                                   Text('Dosen', style: h3,),
                                   Text('Materi', style: h3,),
+                                  Text('Tanggal', style: h3,),
                                   Text('Mulai', style: h3,),
                                   Text('Selesai', style: h3,),
                                   Text('Status', style: h3,)
@@ -131,6 +132,7 @@ class _HomePageState extends State<HomePage> {
                               SizedBox(width: 8,),
                               Column(
                                 children: [
+                                  Text(':', style: h3,),
                                   Text(':', style: h3,),
                                   Text(':', style: h3,),
                                   Text(':', style: h3,),
@@ -144,8 +146,9 @@ class _HomePageState extends State<HomePage> {
                                 children: [
                                   Text('Dwi Otik Kurniawati, M.Eng.', style: h3,),
                                   Text('Hello World C++', style: h3,),
-                                  Text('18-03-2023 09:38:00 WIB', style: h3,),
-                                  Text('26-03-2023 09:38:00 WIB', style: h3,),
+                                  Text('18-03-2023', style: h3,),
+                                  Text('09:38:00 WIB', style: h3,),
+                                  Text('09:38:00 WIB', style: h3,),
                                   Text('Hadir', style: h3,)
                                 ],
                               ),
