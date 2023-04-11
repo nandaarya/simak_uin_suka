@@ -88,7 +88,7 @@ class _HomePageState extends State<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Semester Genap TA 2022/2023',
+              'Aktivitas Semester 4 TA 2022/2023',
               style: h2,
             ),
             const SizedBox(
@@ -98,20 +98,60 @@ class _HomePageState extends State<HomePage> {
               height: heightDevice,
               child: ListView.builder(
                 // controller: ScrollController(),
-                  itemCount: 10,
+                // physics: NeverScrollableScrollPhysics(),
+                  itemCount: 15,
                   itemBuilder: (BuildContext context, int index) {
                     return Container(
                       padding: EdgeInsets.all(defaultPadding),
                       margin: EdgeInsets.only(
                         bottom: defaultMargin
                       ),
-                      height: 100,
+                      height: 140,
                       width: widthDevice,
                       decoration: BoxDecoration(
                           color: primaryColor, borderRadius: BorderRadius.circular(12)),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('PSD'),
+                          Text('Perancangan Algoritma dan Pemrograman A', style: h3b,),
+                          SizedBox(height: 8,),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('Dosen', style: h3,),
+                                  Text('Materi', style: h3,),
+                                  Text('Mulai', style: h3,),
+                                  Text('Selesai', style: h3,),
+                                  Text('Status', style: h3,)
+                                ],
+                              ),
+                              SizedBox(width: 8,),
+                              Column(
+                                children: [
+                                  Text(':', style: h3,),
+                                  Text(':', style: h3,),
+                                  Text(':', style: h3,),
+                                  Text(':', style: h3,),
+                                  Text(':', style: h3,)
+                                ],
+                              ),
+                              SizedBox(width: 8,),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('Dwi Otik Kurniawati, M.Eng.', style: h3,),
+                                  Text('Hello World C++', style: h3,),
+                                  Text('18-03-2023 09:38:00 WIB', style: h3,),
+                                  Text('26-03-2023 09:38:00 WIB', style: h3,),
+                                  Text('Hadir', style: h3,)
+                                ],
+                              ),
+                            ],
+                          ),
+
                         ],
                       ),
                     );
@@ -124,6 +164,7 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       body: ListView(
+        physics: NeverScrollableScrollPhysics(),
         children: [header(), const SizedBox(height: 24), user(), const SizedBox(height: 24), jadwal()],
       ),
     );

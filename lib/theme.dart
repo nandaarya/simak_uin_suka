@@ -26,6 +26,12 @@ TextStyle h3 = GoogleFonts.poppins(
     fontWeight: regular
 );
 
+TextStyle h3b = GoogleFonts.poppins(
+    color: Colors.black,
+    fontSize: 12,
+    fontWeight: medium
+);
+
 FontWeight light = FontWeight.w300;
 FontWeight regular = FontWeight.w400;
 FontWeight medium = FontWeight.w500;
