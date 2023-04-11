@@ -94,7 +94,7 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(
               height: 8,
             ),
-            Container(
+            SizedBox(
               height: heightDevice,
               child: ListView.builder(
                 // controller: ScrollController(),
@@ -114,7 +114,7 @@ class _HomePageState extends State<HomePage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text('Perancangan Algoritma dan Pemrograman A', style: h3b,),
-                          SizedBox(height: 8,),
+                          const SizedBox(height: 8,),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
@@ -129,7 +129,7 @@ class _HomePageState extends State<HomePage> {
                                   Text('Status', style: h3,)
                                 ],
                               ),
-                              SizedBox(width: 8,),
+                              const SizedBox(width: 8,),
                               Column(
                                 children: [
                                   Text(':', style: h3,),
@@ -140,7 +140,7 @@ class _HomePageState extends State<HomePage> {
                                   Text(':', style: h3,)
                                 ],
                               ),
-                              SizedBox(width: 8,),
+                              const SizedBox(width: 8,),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -167,7 +167,7 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       body: ListView(
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         children: [header(), const SizedBox(height: 24), user(), const SizedBox(height: 24), jadwal()],
       ),
     );
