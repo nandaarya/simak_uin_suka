@@ -12,8 +12,6 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
 
-    double widthDevice = MediaQuery.of(context).size.width;
-    double heightDevice = MediaQuery.of(context).size.height - 50;
 
     Widget header() {
       return Container(
@@ -45,7 +43,7 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
         child: Column(
           children: [
-            Icon(Icons.account_circle, size: 100,),
+            const Icon(Icons.account_circle, size: 100,),
             Text('Nanda Arya Putra', style: h2,),
             Text('21106050048', style: h2,),
             Text('User Mahasiswa', style: h2,)
