@@ -60,61 +60,73 @@ class _ProfilePageState extends State<ProfilePage> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text('Ubah Bahasa', style: h2,),
-                    Icon(Icons.arrow_forward_ios_rounded)
-                  ],
-                ),
-                SizedBox(height: 8,),
-                Container(height: 1, color: primaryColor,),
-              ],
+            InkWell(
+              onTap: () {},
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text('Ubah Bahasa', style: h2,),
+                      Icon(Icons.arrow_forward_ios_rounded)
+                    ],
+                  ),
+                  SizedBox(height: 8,),
+                  Container(height: 1, color: primaryColor,),
+                ],
+              ),
             ),
-            Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text('Ubah Data', style: h2,),
-                    Icon(Icons.arrow_forward_ios_rounded)
-                  ],
-                ),
-                SizedBox(height: 8,),
-                Container(height: 1, color: primaryColor,),
-              ],
+            InkWell(
+              onTap: () {},
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text('Ubah Data', style: h2,),
+                      Icon(Icons.arrow_forward_ios_rounded)
+                    ],
+                  ),
+                  SizedBox(height: 8,),
+                  Container(height: 1, color: primaryColor,),
+                ],
+              ),
             ),
-            Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text('Ubah Kata Sandi', style: h2,),
-                    Icon(Icons.arrow_forward_ios_rounded)
-                  ],
-                ),
-                SizedBox(height: 8,),
-                Container(height: 1, color: primaryColor,),
-              ],
+            InkWell(
+              onTap: () {},
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text('Ubah Kata Sandi', style: h2,),
+                      Icon(Icons.arrow_forward_ios_rounded)
+                    ],
+                  ),
+                  SizedBox(height: 8,),
+                  Container(height: 1, color: primaryColor,),
+                ],
+              ),
             ),
-            Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text('Logout', style: h2.copyWith(color: Colors.red),),
-                    Icon(Icons.arrow_forward_ios_rounded)
-                  ],
-                ),
-                SizedBox(height: 8,),
-                Container(height: 1, color: primaryColor,),
-              ],
+            InkWell(
+              onTap: () {},
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text('Logout', style: h2.copyWith(color: Colors.red),),
+                      Icon(Icons.arrow_forward_ios_rounded)
+                    ],
+                  ),
+                  SizedBox(height: 8,),
+                  Container(height: 1, color: primaryColor,),
+                ],
+              ),
             )
           ],
         ),
