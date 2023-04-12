@@ -57,13 +57,65 @@ class _ProfilePageState extends State<ProfilePage> {
         height: 150,
         margin: EdgeInsets.symmetric(horizontal: defaultMargin),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Ubah Bahasa', style: h2,),
-            Text('Ubah Data', style: h2,),
-            Text('Ubah Kata Sandi', style: h2,),
-            Text('Logout', style: h2.copyWith(color: Colors.red),)
+            Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text('Ubah Bahasa', style: h2,),
+                    Icon(Icons.arrow_forward_ios_rounded)
+                  ],
+                ),
+                SizedBox(height: 8,),
+                Container(height: 1, color: primaryColor,),
+              ],
+            ),
+            Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text('Ubah Data', style: h2,),
+                    Icon(Icons.arrow_forward_ios_rounded)
+                  ],
+                ),
+                SizedBox(height: 8,),
+                Container(height: 1, color: primaryColor,),
+              ],
+            ),
+            Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text('Ubah Kata Sandi', style: h2,),
+                    Icon(Icons.arrow_forward_ios_rounded)
+                  ],
+                ),
+                SizedBox(height: 8,),
+                Container(height: 1, color: primaryColor,),
+              ],
+            ),
+            Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text('Logout', style: h2.copyWith(color: Colors.red),),
+                    Icon(Icons.arrow_forward_ios_rounded)
+                  ],
+                ),
+                SizedBox(height: 8,),
+                Container(height: 1, color: primaryColor,),
+              ],
+            )
           ],
         ),
       );
