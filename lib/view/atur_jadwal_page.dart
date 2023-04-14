@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:simak_uin_suka/theme.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+// import 'package:http/http.dart' as http;
+// import 'dart:convert';
 
 class AturJadwalPage extends StatefulWidget {
   const AturJadwalPage({Key? key}) : super(key: key);
