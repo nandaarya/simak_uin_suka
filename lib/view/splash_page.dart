@@ -1,16 +1,4 @@
 import 'package:flutter/material.dart';
-
-// class SplashPage extends StatelessWidget {
-//   const SplashPage({Key? key}) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return const Placeholder();
-//   }
-// }
-
-// import 'dart:async';
-
 import 'package:easy_splash_screen/easy_splash_screen.dart';
 import 'package:simak_uin_suka/view/main_page.dart';
 
