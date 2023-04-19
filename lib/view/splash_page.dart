@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:easy_splash_screen/easy_splash_screen.dart';
+import 'package:simak_uin_suka/theme.dart';
 import 'package:simak_uin_suka/view/main_page.dart';
 
 class SplashPage extends StatefulWidget {
@@ -19,18 +20,14 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     return EasySplashScreen(
       durationInSeconds: 5,
-      logo: Image.network(
-          'https://cdn4.iconfinder.com/data/icons/logos-brands-5/24/flutter-512.png'),
-      title: const Text(
-        "Title",
-        style: TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.bold,
-        ),
+      logo: Image.asset('assets/images/logo_uin.png',),
+      title: Text(
+        "SIMAK UIN SUKA",
+        style: h1,
       ),
       backgroundColor: Colors.grey.shade400,
       showLoader: true,
-      loadingText: const Text("Mengunduh Data..."),
+      loadingText: Text("Mengunduh Data...", style: h2,),
       // futureNavigator: futureCall(),
       navigator: const MainPage(),
     );
