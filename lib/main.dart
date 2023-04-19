@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 // import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/services.dart';
 import 'package:simak_uin_suka/view/main_page.dart';
+import 'package:simak_uin_suka/view/splash_page.dart';
 
 
 void main() async {
@@ -25,15 +26,15 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.orange,
         ),
         debugShowCheckedModeBanner: false,
-        home: const MainPage(),
-        // initialRoute: '/',
-        // routes: {
-        //   '/': (context) => SplashPage(),
+        // home: const MainPage(),
+        initialRoute: '/',
+        routes: {
+          '/': (context) => SplashPage(),
         //   '/signIn_page': (context) => SignInPage(),
-        //   '/main_page': (context) => MainPage(),
+          '/main_page': (context) => MainPage(),
         //   '/nasabah_search_page': (context) => CustomerSearchPage(),
         //   '/news_search_page': (context) => NewsSearchPage(),
-        // }
+        }
         );
   }
 }
