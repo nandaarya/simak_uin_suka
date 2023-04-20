@@ -48,10 +48,12 @@ class SignInPage extends StatelessWidget {
       loginAfterSignUp: true,
       userType: LoginUserType.name,
       title: 'SIMAK UIN SUKA',
+      logo: AssetImage('assets/images/logo_uin.png'),
       theme: LoginTheme(
         titleStyle: h1,
+        headerMargin: defaultMargin,
+        authButtonPadding: EdgeInsets.all(2 * defaultPadding),
       ),
-      logo: AssetImage('assets/images/logo_uin.png'),
       onLogin: _authUser,
       onSignup: _signupUser,
 
