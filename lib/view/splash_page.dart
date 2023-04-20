@@ -20,7 +20,7 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     return EasySplashScreen(
       durationInSeconds: 5,
-      logo: Image.asset('assets/images/logo_uin.png',),
+      logo: Image.asset('assets/images/logo_uin.png', height: 100, width: 100,),
       title: Text(
         "SIMAK UIN SUKA",
         style: h1,
