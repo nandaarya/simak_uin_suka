@@ -49,6 +49,9 @@ class SignInPage extends StatelessWidget {
       userType: LoginUserType.name,
       title: 'SIMAK UIN SUKA',
       logo: AssetImage('assets/images/logo_uin.png'),
+      messages: LoginMessages(
+        userHint: 'NIM / NIP'
+      ),
       theme: LoginTheme(
         titleStyle: h1,
         headerMargin: defaultMargin,
