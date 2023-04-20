@@ -4,13 +4,15 @@ import 'package:flutter_login/flutter_login.dart';
 import 'package:simak_uin_suka/theme.dart';
 import 'package:simak_uin_suka/view/main_page.dart';
 
-const users = const {
+const users = {
   'akunpribadi413@gmail.com': '12345',
   'hunter@gmail.com': 'hunter',
 };
 
 class SignInPage extends StatelessWidget {
-  Duration get loginTime => Duration(milliseconds: 2250);
+  const SignInPage({super.key});
+
+  Duration get loginTime => const Duration(milliseconds: 2250);
 
   Future<String?> _authUser(LoginData data) {
     debugPrint('Name: ${data.name}, Password: ${data.password}');
@@ -48,7 +50,7 @@ class SignInPage extends StatelessWidget {
       loginAfterSignUp: true,
       userType: LoginUserType.name,
       title: 'SIMAK UIN SUKA',
-      logo: AssetImage('assets/images/logo_uin.png'),
+      logo: const AssetImage('assets/images/logo_uin.png'),
       messages: LoginMessages(
         userHint: 'NIM / NIP'
       ),
@@ -74,7 +76,7 @@ class SignInPage extends StatelessWidget {
       ],
       onSubmitAnimationCompleted: () {
         Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => MainPage(),
+          builder: (context) => const MainPage(),
         ));
       },
       onRecoverPassword: _recoverPassword,

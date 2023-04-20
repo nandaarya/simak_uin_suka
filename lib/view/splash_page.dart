@@ -19,7 +19,7 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return EasySplashScreen(
-      durationInSeconds: 5,
+      durationInSeconds: 3,
       logo: Image.asset('assets/images/logo_uin.png'),
       title: Text(
         "SIMAK UIN SUKA",
@@ -29,7 +29,7 @@ class _SplashPageState extends State<SplashPage> {
       showLoader: true,
       loadingText: Text("Mengunduh Data...", style: h2,),
       // futureNavigator: futureCall(),
-      navigator: SignInPage(),
+      navigator: const SignInPage(),
     );
   }
 }
