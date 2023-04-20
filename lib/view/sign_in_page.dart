@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_login/flutter_login.dart';
+import 'package:simak_uin_suka/theme.dart';
 import 'package:simak_uin_suka/view/main_page.dart';
 
 const users = const {
@@ -44,8 +45,13 @@ class SignInPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FlutterLogin(
-      title: 'Login',
-      // logo: AssetImage('assets/images/logo_uin.png'),
+      loginAfterSignUp: true,
+      userType: LoginUserType.name,
+      title: 'SIMAK UIN SUKA',
+      theme: LoginTheme(
+        titleStyle: h1,
+      ),
+      logo: AssetImage('assets/images/logo_uin.png'),
       onLogin: _authUser,
       onSignup: _signupUser,
 
