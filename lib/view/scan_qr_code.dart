@@ -125,7 +125,7 @@ class _QRScannerState extends State<QRScanner> {
     //     MediaQuery.of(context).size.height < 400)
     //     ? 150.0
     //     : 300.0;
-    var scanArea = 300.0;
+    var scanArea = 150.0;
     // To ensure the Scanner view is properly sizes after rotation
     // we need to listen for Flutter SizeChanged notification and update controller
     return QRView(
