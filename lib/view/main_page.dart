@@ -3,6 +3,7 @@ import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/services.dart';
 // import 'package:simak_uin_suka/view/atur_jadwal_page.dart';
 import 'package:simak_uin_suka/view/generate_qr_code.dart';
+import 'package:simak_uin_suka/view/scan_qr_code.dart';
 import 'home_page.dart';
 import 'profile_page.dart';
 import 'package:simak_uin_suka/theme.dart';
@@ -32,11 +33,39 @@ class _MainPageState extends State<MainPage> {
       },
       child: Scaffold(
         body: widgets[currentIndex],
-        floatingActionButton: FloatingActionButton(
-          // GenerateQRCode -> Atur Jadwal
-          onPressed: () {Navigator.push(context, PageTransition(child: const GenerateQRCode(), type: PageTransitionType.bottomToTop));},
-          backgroundColor: secondaryColor,
-          child: const Icon(Icons.add, color: Colors.white,),
+        floatingActionButton: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            FloatingActionButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    PageTransition(
+                        child: const QRScanner(),
+                        type: PageTransitionType.bottomToTop));
+              },
+              backgroundColor: secondaryColor,
+              child: const Icon(
+                Icons.camera_alt,
+                color: Colors.white,
+              ),
+            ),
+            FloatingActionButton(
+              // GenerateQRCode -> Atur Jadwal
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    PageTransition(
+                        child: const GenerateQRCode(),
+                        type: PageTransitionType.bottomToTop));
+              },
+              backgroundColor: secondaryColor,
+              child: const Icon(
+                Icons.add,
+                color: Colors.white,
+              ),
+            ),
+          ],
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         bottomNavigationBar: ConvexAppBar(
