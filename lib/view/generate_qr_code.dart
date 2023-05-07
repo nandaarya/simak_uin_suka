@@ -15,7 +15,7 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Flutter + QR code'),
+        title: const Text('Atur Jadwal Kelas'),
         centerTitle: true,
       ),
       body: Column(
