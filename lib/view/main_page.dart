@@ -37,6 +37,7 @@ class _MainPageState extends State<MainPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             FloatingActionButton(
+              heroTag: 'FAB1',
               onPressed: () {
                 Navigator.push(
                     context,
@@ -51,6 +52,7 @@ class _MainPageState extends State<MainPage> {
               ),
             ),
             FloatingActionButton(
+              heroTag: 'FAB2',
               // GenerateQRCode -> Atur Jadwal
               onPressed: () {
                 Navigator.push(
