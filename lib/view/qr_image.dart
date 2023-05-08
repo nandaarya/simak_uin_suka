@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class QRImage extends StatelessWidget {
-  const QRImage(this.controller, {super.key});
-
-  final TextEditingController controller;
+  final String qrData;
+  const QRImage({super.key,required this.qrData});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +14,7 @@ class QRImage extends StatelessWidget {
       ),
       body: Center(
         child: QrImage(
-          data: controller.text,
+          data: qrData,
           size: 300,
           // You can include embeddedImageStyle Property if you
           //wanna embed an image from your Asset folder

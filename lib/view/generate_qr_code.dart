@@ -9,7 +9,13 @@ class GenerateQRCode extends StatefulWidget {
 }
 
 class GenerateQRCodeState extends State<GenerateQRCode> {
-  TextEditingController controller = TextEditingController();
+  TextEditingController materiController = TextEditingController();
+
+  @override
+  void dispose() {
+    materiController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +30,7 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
           Container(
             margin: const EdgeInsets.all(20),
             child: TextField(
-              controller: controller,
+              controller: materiController,
               decoration: const InputDecoration(
                   border: OutlineInputBorder(), labelText: 'Enter your URL'),
             ),
@@ -35,9 +41,7 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: ((context) {
-                      return QRImage(controller);
-                    }),
+                    builder: ((context) => QRImage(qrData: materiController.text)),
                   ),
                 );
               },
