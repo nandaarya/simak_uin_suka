@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'qr_image.dart';
 
 class GenerateQRCode extends StatefulWidget {
@@ -12,13 +13,12 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
   TextEditingController materiController = TextEditingController();
   final _timeC = TextEditingController();
   DateTime selectedDate = DateTime.now();
+
   ///Time
   TimeOfDay timeOfDay = TimeOfDay.now();
 
   Future displayTimePicker(BuildContext context) async {
-    var time = await showTimePicker(
-        context: context,
-        initialTime: timeOfDay);
+    var time = await showTimePicker(context: context, initialTime: timeOfDay);
 
     if (time != null) {
       setState(() {
@@ -54,13 +54,13 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
           ElevatedButton(
               onPressed: () {
                 showDatePicker(
-                    context: this.context,
-                    initialDate: selectedDate,
-                    firstDate: DateTime(1900),
-                    lastDate: DateTime.now(),
-                    initialDatePickerMode: DatePickerMode.year,
-                    cancelText: "cancel",
-                    confirmText: "confirm")
+                        context: this.context,
+                        initialDate: selectedDate,
+                        firstDate: DateTime(1900),
+                        lastDate: DateTime.now(),
+                        initialDatePickerMode: DatePickerMode.year,
+                        cancelText: "cancel",
+                        confirmText: "confirm")
                     .then((value) {
                   if (value != null) {
                     print(value);
@@ -74,17 +74,36 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
                   backgroundColor: Colors.white, elevation: 0),
               child: const Icon(Icons.calendar_today_outlined,
                   color: Colors.grey)),
-          ElevatedButton(onPressed: () => displayTimePicker(context), child: const Text("Pick Time")),
-    TextFormField(
-    controller: _timeC,
-    decoration: const InputDecoration(
-    labelText: 'Time picker', border: OutlineInputBorder()),),
+          ElevatedButton(
+              onPressed: () => displayTimePicker(context),
+              child: const Text("Pick Time")),
+          TextFormField(
+            controller: _timeC,
+            decoration: const InputDecoration(
+                labelText: 'Time picker', border: OutlineInputBorder()),
+          ),
+          TextButton(
+              onPressed: () {
+                DatePicker.showDateTimePicker(context,
+                    showTitleActions: true,
+                    minTime: DateTime(2018, 3, 5),
+                    maxTime: DateTime(2019, 6, 7), onChanged: (date) {
+                  print('change $date');
+                }, onConfirm: (date) {
+                  print('confirm $date');
+                }, currentTime: DateTime.now(), locale: LocaleType.id);
+              },
+              child: Text(
+                'show date time picker',
+                style: TextStyle(color: Colors.blue),
+              )),
           ElevatedButton(
               onPressed: () async {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: ((context) => QRImage(qrData: materiController.text)),
+                    builder: ((context) =>
+                        QRImage(qrData: materiController.text)),
                   ),
                 );
               },
