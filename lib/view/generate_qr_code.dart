@@ -10,6 +10,22 @@ class GenerateQRCode extends StatefulWidget {
 
 class GenerateQRCodeState extends State<GenerateQRCode> {
   TextEditingController materiController = TextEditingController();
+  final _timeC = TextEditingController();
+  DateTime selectedDate = DateTime.now();
+  ///Time
+  TimeOfDay timeOfDay = TimeOfDay.now();
+
+  Future displayTimePicker(BuildContext context) async {
+    var time = await showTimePicker(
+        context: context,
+        initialTime: timeOfDay);
+
+    if (time != null) {
+      setState(() {
+        _timeC.text = "${time.hour}:${time.minute}";
+      });
+    }
+  }
 
   @override
   void dispose() {
@@ -35,7 +51,34 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
                   border: OutlineInputBorder(), labelText: 'Enter your URL'),
             ),
           ),
-          //This button when pressed navigates to QR code generation
+          ElevatedButton(
+              onPressed: () {
+                showDatePicker(
+                    context: this.context,
+                    initialDate: selectedDate,
+                    firstDate: DateTime(1900),
+                    lastDate: DateTime.now(),
+                    initialDatePickerMode: DatePickerMode.year,
+                    cancelText: "cancel",
+                    confirmText: "confirm")
+                    .then((value) {
+                  if (value != null) {
+                    print(value);
+                    setState(() {
+                      selectedDate = value;
+                    });
+                  }
+                });
+              },
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white, elevation: 0),
+              child: const Icon(Icons.calendar_today_outlined,
+                  color: Colors.grey)),
+          ElevatedButton(onPressed: () => displayTimePicker(context), child: const Text("Pick Time")),
+    TextFormField(
+    controller: _timeC,
+    decoration: const InputDecoration(
+    labelText: 'Time picker', border: OutlineInputBorder()),),
           ElevatedButton(
               onPressed: () async {
                 Navigator.push(
