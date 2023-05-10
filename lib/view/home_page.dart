@@ -123,9 +123,9 @@ class _HomePageState extends State<HomePage> {
                                 children: [
                                   Text('Dosen', style: h3,),
                                   Text('Materi', style: h3,),
-                                  Text('Tanggal', style: h3,),
                                   Text('Mulai', style: h3,),
                                   Text('Selesai', style: h3,),
+                                  Text('Ruang', style: h3,),
                                   Text('Status', style: h3,)
                                 ],
                               ),
@@ -146,9 +146,9 @@ class _HomePageState extends State<HomePage> {
                                 children: [
                                   Text('Dwi Otik Kurniawati, M.Eng.', style: h3,),
                                   Text('Hello World C++', style: h3,),
-                                  Text('18-03-2023', style: h3,),
                                   Text('09:38:00 WIB', style: h3,),
                                   Text('09:38:00 WIB', style: h3,),
+                                  Text('FST 404', style: h3,),
                                   Text('Hadir', style: h3,)
                                 ],
                               ),
