@@ -93,8 +93,8 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
                   print('confirm $date');
                 }, currentTime: DateTime.now(), locale: LocaleType.id);
               },
-              child: Text(
-                'show date time picker',
+              child: const Text(
+                'Pilih Waktu Mulai',
                 style: TextStyle(color: Colors.blue),
               )),
           ElevatedButton(
