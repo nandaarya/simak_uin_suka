@@ -86,8 +86,8 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
               onPressed: () {
                 DatePicker.showDateTimePicker(context,
                     showTitleActions: true,
-                    minTime: DateTime(2018, 3, 5),
-                    maxTime: DateTime(2019, 6, 7), onChanged: (date) {
+                    // Without maxTime
+                    minTime: DateTime.now(), onChanged: (date) {
                   print('change $date');
                 }, onConfirm: (date) {
                   print('confirm $date');
