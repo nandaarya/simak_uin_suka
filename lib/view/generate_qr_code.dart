@@ -11,7 +11,7 @@ class GenerateQRCode extends StatefulWidget {
 
 class GenerateQRCodeState extends State<GenerateQRCode> {
   TextEditingController materiController = TextEditingController();
-  DateTime selectedDate = DateTime.now();
+  DateTime startTime = DateTime.now();
 
   @override
   void dispose() {
@@ -37,21 +37,29 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
                   border: OutlineInputBorder(), labelText: 'Enter your URL'),
             ),
           ),
-          TextButton(
-              onPressed: () {
-                DatePicker.showDateTimePicker(context,
-                    showTitleActions: true,
-                    // Without maxTime
-                    minTime: DateTime.now(), onChanged: (date) {
-                  print('change $date');
-                }, onConfirm: (date) {
-                  print('confirm $date');
-                }, currentTime: DateTime.now(), locale: LocaleType.id);
-              },
-              child: const Text(
-                'Pilih Waktu Mulai',
-                style: TextStyle(color: Colors.blue),
-              )),
+          Row(
+            children: [
+              TextButton(
+                  onPressed: () {
+                    DatePicker.showDateTimePicker(context,
+                        showTitleActions: true,
+                        // Without maxTime
+                        minTime: DateTime.now(), onChanged: (date) {
+                      print('change $date');
+                    }, onConfirm: (date) {
+                      setState(() {
+                        startTime = date;
+                      });
+                      print('confirm $date');
+                    }, currentTime: DateTime.now(), locale: LocaleType.id);
+                  },
+                  child: const Text(
+                    'Pilih Waktu Mulai',
+                    style: TextStyle(color: Colors.blue),
+                  )),
+              Text(startTime.toString())
+            ],
+          ),
           ElevatedButton(
               onPressed: () async {
                 Navigator.push(
