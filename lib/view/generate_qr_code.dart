@@ -12,6 +12,7 @@ class GenerateQRCode extends StatefulWidget {
 class GenerateQRCodeState extends State<GenerateQRCode> {
   TextEditingController materiController = TextEditingController();
   DateTime startTime = DateTime.now();
+  DateTime endTime = DateTime.now();
 
   @override
   void dispose() {
@@ -58,6 +59,29 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
                     style: TextStyle(color: Colors.blue),
                   )),
               Text(startTime.toString())
+            ],
+          ),
+          Row(
+            children: [
+              TextButton(
+                  onPressed: () {
+                    DatePicker.showDateTimePicker(context,
+                        showTitleActions: true,
+                        // Without maxTime
+                        minTime: DateTime.now(), onChanged: (date) {
+                          print('change $date');
+                        }, onConfirm: (date) {
+                          setState(() {
+                            endTime = date;
+                          });
+                          print('confirm $date');
+                        }, currentTime: DateTime.now(), locale: LocaleType.id);
+                  },
+                  child: const Text(
+                    'Pilih Waktu Mulai',
+                    style: TextStyle(color: Colors.blue),
+                  )),
+              Text(endTime.toString())
             ],
           ),
           ElevatedButton(
