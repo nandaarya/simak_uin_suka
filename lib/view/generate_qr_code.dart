@@ -78,7 +78,7 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
                         }, currentTime: DateTime.now(), locale: LocaleType.id);
                   },
                   child: const Text(
-                    'Pilih Waktu Mulai',
+                    'Pilih Waktu Selesai',
                     style: TextStyle(color: Colors.blue),
                   )),
               Text(endTime.toString())
