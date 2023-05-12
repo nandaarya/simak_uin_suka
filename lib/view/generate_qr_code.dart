@@ -35,7 +35,7 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
             child: TextField(
               controller: materiController,
               decoration: const InputDecoration(
-                  border: OutlineInputBorder(), labelText: 'Enter your URL'),
+                  border: OutlineInputBorder(), labelText: 'Materi Perkuliahan'),
             ),
           ),
           Row(
