@@ -105,6 +105,7 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
                 Text(DateFormat("hh:mm WIB", "id_ID").format(endTime)),
               ],
             ),
+            SizedBox(height: 8,),
             const Text('Masukkan Ruang Perkuliahan'),
             TextField(
               controller: ruangController,
@@ -112,6 +113,7 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
                   border: OutlineInputBorder(),
                   labelText: 'Ruang Perkuliahan'),
             ),
+            SizedBox(height: 8,),
             Center(
               child: ElevatedButton(
                   onPressed: () async {
@@ -123,7 +125,7 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
                       ),
                     );
                   },
-                  child: const Text('GENERATE QR CODE')),
+                  child: const Text('ATUR JADWAL')),
             ),
           ],
         ),
