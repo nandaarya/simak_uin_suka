@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:intl/intl.dart';
 import '../theme.dart';
 import 'qr_image.dart';
 
@@ -23,6 +24,15 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
     super.dispose();
   }
 
+  // String dateIdFormat(date) {
+  //   initializeDateFormatting('id_ID', null).then((_) {
+  //     var formatter = DateFormat('dd MMMM y', 'id_ID');
+  //     String formattedDate = formatter.format(date).toString() ;
+  //     return formattedDate;
+  //   });
+  //   return "Atur Waktu";
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,52 +54,57 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
                     border: OutlineInputBorder(), labelText: 'Masukkan Materi Perkuliahan'),
               ),
             ),
+            TextButton(
+                onPressed: () {
+                  DatePicker.showDateTimePicker(context,
+                      showTitleActions: true,
+                      // Without maxTime
+                      minTime: DateTime.now(), onChanged: (date) {
+                    print('change $date');
+                  }, onConfirm: (date) {
+                    setState(() {
+                      startTime = date;
+                    });
+                    print('confirm $date');
+                  }, currentTime: DateTime.now(), locale: LocaleType.id);
+                },
+                child: const Text(
+                  'Pilih Waktu Mulai',
+                  style: TextStyle(color: Colors.blue),
+                )),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                TextButton(
-                    onPressed: () {
-                      DatePicker.showDateTimePicker(context,
-                          showTitleActions: true,
-                          // Without maxTime
-                          minTime: DateTime.now(), onChanged: (date) {
+                Text('Waktu mulai: '),
+                Text(DateFormat(
+                    "EEEE, d MMMM yyyy","id_ID"
+                ).format(startTime)),
+                Text(DateFormat(
+                    "hh:mm WIB","id_ID"
+                ).format(startTime)),
+                // SizedBox(width: 8,),
+                // Text(DateFormat.Hm().format(startTime)),
+              ],
+            ),
+            TextButton(
+                onPressed: () {
+                  DatePicker.showDateTimePicker(context,
+                      showTitleActions: true,
+                      // Without maxTime
+                      minTime: DateTime.now(), onChanged: (date) {
                         print('change $date');
                       }, onConfirm: (date) {
                         setState(() {
-                          startTime = date;
+                          endTime = date;
                         });
                         print('confirm $date');
                       }, currentTime: DateTime.now(), locale: LocaleType.id);
-                    },
-                    child: const Text(
-                      'Pilih Waktu Mulai',
-                      style: TextStyle(color: Colors.blue),
-                    )),
-                Text(startTime.toString())
-              ],
-            ),
-            Row(
-              children: [
-                TextButton(
-                    onPressed: () {
-                      DatePicker.showDateTimePicker(context,
-                          showTitleActions: true,
-                          // Without maxTime
-                          minTime: DateTime.now(), onChanged: (date) {
-                            print('change $date');
-                          }, onConfirm: (date) {
-                            setState(() {
-                              endTime = date;
-                            });
-                            print('confirm $date');
-                          }, currentTime: DateTime.now(), locale: LocaleType.id);
-                    },
-                    child: const Text(
-                      'Pilih Waktu Selesai',
-                      style: TextStyle(color: Colors.blue),
-                    )),
-                Text(endTime.toString())
-              ],
-            ),
+                },
+                child: const Text(
+                  'Pilih Waktu Selesai',
+                  style: TextStyle(color: Colors.blue),
+                )),
+            Text(endTime.toString()),
             const Text('Masukkan Ruang Perkuliahan'),
             Container(
               child: TextField(
