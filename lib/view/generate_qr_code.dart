@@ -11,12 +11,14 @@ class GenerateQRCode extends StatefulWidget {
 
 class GenerateQRCodeState extends State<GenerateQRCode> {
   TextEditingController materiController = TextEditingController();
+  TextEditingController ruangController = TextEditingController();
   DateTime startTime = DateTime.now();
   DateTime endTime = DateTime.now();
 
   @override
   void dispose() {
     materiController.dispose();
+    ruangController.dispose();
     super.dispose();
   }
 
@@ -83,6 +85,14 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
                   )),
               Text(endTime.toString())
             ],
+          ),
+          Container(
+            margin: const EdgeInsets.all(20),
+            child: TextField(
+              controller: ruangController,
+              decoration: const InputDecoration(
+                  border: OutlineInputBorder(), labelText: 'Ruang Perkuliahan'),
+            ),
           ),
           ElevatedButton(
               onPressed: () async {
