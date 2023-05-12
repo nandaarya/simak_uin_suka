@@ -41,18 +41,17 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
         centerTitle: true,
       ),
       body: Container(
-        margin: EdgeInsets.symmetric(horizontal: defaultMargin),
+        margin: EdgeInsets.all(defaultMargin),
         padding: EdgeInsets.all(defaultPadding),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text('Materi Perkuliahan'),
-            Container(
-              child: TextField(
-                controller: materiController,
-                decoration: const InputDecoration(
-                    border: OutlineInputBorder(), labelText: 'Masukkan Materi Perkuliahan'),
-              ),
+            TextField(
+              controller: materiController,
+              decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Masukkan Materi Perkuliahan'),
             ),
             TextButton(
                 onPressed: () {
@@ -73,17 +72,11 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
                   style: TextStyle(color: Colors.blue),
                 )),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Waktu mulai: '),
-                Text(DateFormat(
-                    "EEEE, d MMMM yyyy","id_ID"
-                ).format(startTime)),
-                Text(DateFormat(
-                    "hh:mm WIB","id_ID"
-                ).format(startTime)),
-                // SizedBox(width: 8,),
-                // Text(DateFormat.Hm().format(startTime)),
+                const Text('Waktu mulai: '),
+                Text(DateFormat("EEEE, d MMMM yyyy ", "id_ID").format(startTime)),
+                Text(DateFormat("hh:mm WIB", "id_ID").format(startTime)),
               ],
             ),
             TextButton(
@@ -91,27 +84,33 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
                   DatePicker.showDateTimePicker(context,
                       showTitleActions: true,
                       // Without maxTime
-                      minTime: DateTime.now(), onChanged: (date) {
-                        print('change $date');
-                      }, onConfirm: (date) {
-                        setState(() {
-                          endTime = date;
-                        });
-                        print('confirm $date');
-                      }, currentTime: DateTime.now(), locale: LocaleType.id);
+                      minTime: startTime, onChanged: (date) {
+                    print('change $date');
+                  }, onConfirm: (date) {
+                    setState(() {
+                      endTime = date;
+                    });
+                    print('confirm $date');
+                  }, currentTime: DateTime.now(), locale: LocaleType.id);
                 },
                 child: const Text(
                   'Pilih Waktu Selesai',
                   style: TextStyle(color: Colors.blue),
                 )),
-            Text(endTime.toString()),
+            Row(
+              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text('Waktu selesai: '),
+                Text(DateFormat("EEEE, d MMMM yyyy ", "id_ID").format(endTime)),
+                Text(DateFormat("hh:mm WIB", "id_ID").format(endTime)),
+              ],
+            ),
             const Text('Masukkan Ruang Perkuliahan'),
-            Container(
-              child: TextField(
-                controller: ruangController,
-                decoration: const InputDecoration(
-                    border: OutlineInputBorder(), labelText: 'Ruang Perkuliahan'),
-              ),
+            TextField(
+              controller: ruangController,
+              decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Ruang Perkuliahan'),
             ),
             Center(
               child: ElevatedButton(
