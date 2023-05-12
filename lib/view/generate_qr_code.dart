@@ -24,15 +24,6 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
     super.dispose();
   }
 
-  // String dateIdFormat(date) {
-  //   initializeDateFormatting('id_ID', null).then((_) {
-  //     var formatter = DateFormat('dd MMMM y', 'id_ID');
-  //     String formattedDate = formatter.format(date).toString() ;
-  //     return formattedDate;
-  //   });
-  //   return "Atur Waktu";
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -105,7 +96,7 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
                 Text(DateFormat("hh:mm WIB", "id_ID").format(endTime)),
               ],
             ),
-            SizedBox(height: 8,),
+            const SizedBox(height: 8,),
             const Text('Masukkan Ruang Perkuliahan'),
             TextField(
               controller: ruangController,
@@ -113,7 +104,7 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
                   border: OutlineInputBorder(),
                   labelText: 'Ruang Perkuliahan'),
             ),
-            SizedBox(height: 8,),
+            const SizedBox(height: 8,),
             Center(
               child: ElevatedButton(
                   onPressed: () async {
