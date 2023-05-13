@@ -50,12 +50,10 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
                       showTitleActions: true,
                       // Without maxTime
                       minTime: DateTime.now(), onChanged: (date) {
-                    print('change $date');
                   }, onConfirm: (date) {
                     setState(() {
                       startTime = date;
                     });
-                    print('confirm $date');
                   }, currentTime: DateTime.now(), locale: LocaleType.id);
                 },
                 child: const Text(
@@ -76,12 +74,10 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
                       showTitleActions: true,
                       // Without maxTime
                       minTime: startTime, onChanged: (date) {
-                    print('change $date');
                   }, onConfirm: (date) {
                     setState(() {
                       endTime = date;
                     });
-                    print('confirm $date');
                   }, currentTime: DateTime.now(), locale: LocaleType.id);
                 },
                 child: const Text(
