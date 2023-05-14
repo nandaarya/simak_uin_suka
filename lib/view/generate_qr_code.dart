@@ -60,10 +60,10 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
                   'Pilih Waktu Mulai',
                   style: TextStyle(color: Colors.blue),
                 )),
+            const Text('Waktu mulai: '),
             Row(
-              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('Waktu mulai: '),
                 Text(DateFormat("EEEE, d MMMM yyyy ", "id_ID").format(startTime)),
                 Text(DateFormat("hh:mm WIB", "id_ID").format(startTime)),
               ],
@@ -84,10 +84,10 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
                   'Pilih Waktu Selesai',
                   style: TextStyle(color: Colors.blue),
                 )),
+            const Text('Waktu selesai: '),
             Row(
-              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('Waktu selesai: '),
                 Text(DateFormat("EEEE, d MMMM yyyy ", "id_ID").format(endTime)),
                 Text(DateFormat("hh:mm WIB", "id_ID").format(endTime)),
               ],
