@@ -97,7 +97,7 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(DateFormat("EEEE, d MMMM yyyy ", "id_ID").format(startTime), style: h3.copyWith(fontSize: 14),),
-                  Text(DateFormat("hh:mm WIB", "id_ID").format(startTime), style: h3.copyWith(fontSize: 14),),
+                  Text(DateFormat("HH:mm WIB", "id_ID").format(startTime), style: h3.copyWith(fontSize: 14),),
                 ],
               ),
               const SizedBox(height: 8,),
@@ -106,7 +106,7 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(DateFormat("EEEE, d MMMM yyyy ", "id_ID").format(endTime), style: h3.copyWith(fontSize: 14),),
-                  Text(DateFormat("hh:mm WIB", "id_ID").format(endTime), style: h3.copyWith(fontSize: 14),),
+                  Text(DateFormat("HH:mm WIB", "id_ID").format(endTime), style: h3.copyWith(fontSize: 14),),
                 ],
               ),
               const SizedBox(height: 8,),
