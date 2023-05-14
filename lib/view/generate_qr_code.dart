@@ -79,7 +79,7 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
                         DatePicker.showDateTimePicker(context,
                             showTitleActions: true,
                             // Without maxTime
-                            minTime: startTime, onChanged: (date) {
+                            minTime: DateTime.now(), onChanged: (date) {
                             }, onConfirm: (date) {
                               setState(() {
                                 endTime = date;
@@ -100,6 +100,7 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
                   Text(DateFormat("hh:mm WIB", "id_ID").format(startTime), style: h3.copyWith(fontSize: 14),),
                 ],
               ),
+              const SizedBox(height: 8,),
               Text('Waktu selesai: ', style: h3.copyWith(fontSize: 14),),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
