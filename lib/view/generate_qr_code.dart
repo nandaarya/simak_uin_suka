@@ -53,22 +53,44 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
                   border: OutlineInputBorder(),
                   labelText: 'Masukkan Materi Perkuliahan'),
             ),
-            TextButton(
-                onPressed: () {
-                  DatePicker.showDateTimePicker(context,
-                      showTitleActions: true,
-                      // Without maxTime
-                      minTime: DateTime.now(), onChanged: (date) {
-                  }, onConfirm: (date) {
-                    setState(() {
-                      startTime = date;
-                    });
-                  }, currentTime: DateTime.now(), locale: LocaleType.id);
-                },
-                child: const Text(
-                  'Pilih Waktu Mulai',
-                  style: TextStyle(color: Colors.blue),
-                )),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TextButton(
+                    onPressed: () {
+                      DatePicker.showDateTimePicker(context,
+                          showTitleActions: true,
+                          // Without maxTime
+                          minTime: DateTime.now(), onChanged: (date) {
+                      }, onConfirm: (date) {
+                        setState(() {
+                          startTime = date;
+                        });
+                      }, currentTime: DateTime.now(), locale: LocaleType.id);
+                    },
+                    child: const Text(
+                      'Pilih Waktu Mulai',
+                      style: TextStyle(color: Colors.blue),
+                    )),
+                Text('-'),
+                TextButton(
+                    onPressed: () {
+                      DatePicker.showDateTimePicker(context,
+                          showTitleActions: true,
+                          // Without maxTime
+                          minTime: startTime, onChanged: (date) {
+                          }, onConfirm: (date) {
+                            setState(() {
+                              endTime = date;
+                            });
+                          }, currentTime: DateTime.now(), locale: LocaleType.id);
+                    },
+                    child: const Text(
+                      'Pilih Waktu Selesai',
+                      style: TextStyle(color: Colors.blue),
+                    )),
+              ],
+            ),
             const Text('Waktu mulai: '),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -77,22 +99,6 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
                 Text(DateFormat("hh:mm WIB", "id_ID").format(startTime)),
               ],
             ),
-            TextButton(
-                onPressed: () {
-                  DatePicker.showDateTimePicker(context,
-                      showTitleActions: true,
-                      // Without maxTime
-                      minTime: startTime, onChanged: (date) {
-                  }, onConfirm: (date) {
-                    setState(() {
-                      endTime = date;
-                    });
-                  }, currentTime: DateTime.now(), locale: LocaleType.id);
-                },
-                child: const Text(
-                  'Pilih Waktu Selesai',
-                  style: TextStyle(color: Colors.blue),
-                )),
             const Text('Waktu selesai: '),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
