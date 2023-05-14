@@ -14,6 +14,7 @@ class GenerateQRCode extends StatefulWidget {
 class GenerateQRCodeState extends State<GenerateQRCode> {
   TextEditingController materiController = TextEditingController();
   TextEditingController ruangController = TextEditingController();
+  TextEditingController kelasController = TextEditingController();
   DateTime startTime = DateTime.now();
   DateTime endTime = DateTime.now();
 
@@ -37,7 +38,15 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Materi Perkuliahan'),
+            Text('Pilih Kelas', style: h2,),
+            TextField(
+              controller: kelasController,
+              decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Masukkan Kelas Perkuliahan'),
+            ),
+            const SizedBox(height: 8,),
+            Text('Materi Perkuliahan', style: h2,),
             TextField(
               controller: materiController,
               decoration: const InputDecoration(
@@ -93,7 +102,7 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
               ],
             ),
             const SizedBox(height: 8,),
-            const Text('Masukkan Ruang Perkuliahan'),
+            Text('Masukkan Ruang Perkuliahan', style: h2,),
             TextField(
               controller: ruangController,
               decoration: const InputDecoration(
