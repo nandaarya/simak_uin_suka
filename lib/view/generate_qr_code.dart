@@ -6,8 +6,16 @@ import '../theme.dart';
 import 'qr_image.dart';
 import 'package:http/http.dart' as http;
 
-Future<List<String>> fetchData() async {
+  fetchData() async {
   final response = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/users'));
+  if (response.statusCode == 200) {
+    var users = jsonDecode(response.body);
+    var filteredUsers = users.where((user) => user["name"] != null).toList();
+    var names = filteredUsers.map((user) => user["name"]).toList();
+    print(names);
+  } else {
+    print('Failed to fetch data');
+  }
 
   // if (response.statusCode == 200) {
   //   final List<dynamic> data = json.decode(response.body);
@@ -16,13 +24,13 @@ Future<List<String>> fetchData() async {
   //   throw Exception('Failed to fetch data from API');
   // }
 
-  if (response.statusCode == 200) {
-    final jsonResponse = json.decode(response.body);
-    final List<dynamic> data = jsonResponse['name']; // Ganti 'key' dengan key yang ingin Anda ambil
-    return List<String>.from(data);
-  } else {
-    throw Exception('Failed to load data');
-  }
+  // if (response.statusCode == 200) {
+  //   final jsonResponse = json.decode(response.body);
+  //   final List<dynamic> data = jsonResponse['id']; // Ganti 'key' dengan key yang ingin Anda ambil
+  //   return List<String>.from(data);
+  // } else {
+  //   throw Exception('Failed to load data');
+  // }
 }
 
 class GenerateQRCode extends StatefulWidget {
@@ -44,11 +52,12 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
   @override
   void initState() {
     super.initState();
-    fetchData().then((data) {
-      setState(() {
-        dropdownKelas = data;
-      });
-    });
+    fetchData();
+    // fetchData().then((data) {
+    //   setState(() {
+    //     dropdownKelas = data;
+    //   });
+    // });
   }
 
   @override
@@ -83,20 +92,20 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
                     labelText: 'Masukkan Kelas Perkuliahan'),
               ),
               const SizedBox(height: 8,),
-              DropdownButton<String>(
-                value: selectedKelas,
-                items: dropdownKelas.map((String item) {
-                  return DropdownMenuItem<String>(
-                    value: item,
-                    child: Text(item),
-                  );
-                }).toList(),
-                onChanged: (String? newValue) {
-                  setState(() {
-                    selectedKelas = newValue;
-                  });
-                },
-              ),
+              // DropdownButton<String>(
+              //   value: selectedKelas,
+              //   items: dropdownKelas.map((String item) {
+              //     return DropdownMenuItem<String>(
+              //       value: item,
+              //       child: Text(item),
+              //     );
+              //   }).toList(),
+              //   onChanged: (String? newValue) {
+              //     setState(() {
+              //       selectedKelas = newValue;
+              //     });
+              //   },
+              // ),
               const SizedBox(height: 8,),
               Text(
                 'Materi Perkuliahan',
