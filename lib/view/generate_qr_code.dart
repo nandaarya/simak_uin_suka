@@ -17,20 +17,6 @@ import 'package:http/http.dart' as http;
     print('Failed to fetch data');
   }
 
-  // if (response.statusCode == 200) {
-  //   final List<dynamic> data = json.decode(response.body);
-  //   return List<String>.from(data);
-  // } else {
-  //   throw Exception('Failed to fetch data from API');
-  // }
-
-  // if (response.statusCode == 200) {
-  //   final jsonResponse = json.decode(response.body);
-  //   final List<dynamic> data = jsonResponse['id']; // Ganti 'key' dengan key yang ingin Anda ambil
-  //   return List<String>.from(data);
-  // } else {
-  //   throw Exception('Failed to load data');
-  // }
 }
 
 class GenerateQRCode extends StatefulWidget {
