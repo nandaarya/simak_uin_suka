@@ -11,10 +11,6 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-  // Future<Widget> futureCall() async {
-  //   // do async operation ( api call, auto login)
-  //   return Future.value(new MainPage());
-  // }
 
   @override
   Widget build(BuildContext context) {
