@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:simak_uin_suka/theme.dart';
 import '../model/jadwalModel.dart';
 import 'package:http/http.dart' as http;
@@ -13,6 +14,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<JadwalModel> jadwalList = [];
+  bool isLoading = true;
+
+  static const loading = Center(
+      heightFactor: 2.0,
+      child: SpinKitCircle(
+        color: Colors.grey,
+        size: 150,
+      ));
 
   @override
   void initState() {
@@ -20,11 +30,10 @@ class _HomePageState extends State<HomePage> {
     getJadwal();
   }
 
-  List<JadwalModel> jadwalList = [];
-
   Future<void> getJadwal() async {
     try {
-      var response = await http.get(Uri.parse('https://simak-back-end.cyclic.app/api/' + 'jadwal'));
+      var response = await http
+          .get(Uri.parse('https://simak-back-end.cyclic.app/api/' + 'jadwal'));
       if (response.statusCode == 200) {
         var jsonData = json.decode(response.body);
         if (jsonData["data"]["classes"] != null) {
@@ -38,6 +47,9 @@ class _HomePageState extends State<HomePage> {
           });
         }
       }
+      setState(() {
+        isLoading = false;
+      });
       for (var jadwal in jadwalList) {
         print('classCode: ${jadwal.classCode}');
         print('className: ${jadwal.className}');
@@ -48,7 +60,6 @@ class _HomePageState extends State<HomePage> {
         print('room: ${jadwal.room}');
         print('--------------');
       }
-
     } catch (e) {
       print("Something went wrong while getting jadwal");
       print(e);
@@ -143,7 +154,7 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               height: heightDevice,
               child: ListView.builder(
-                padding: const EdgeInsets.only(bottom: 320),
+                  padding: const EdgeInsets.only(bottom: 320),
                   // controller: ScrollController(),
                   // physics: NeverScrollableScrollPhysics(),
                   // shrinkWrap: true, // Mengatur agar ukuran ListView menyesuaikan dengan item yang terlihat
@@ -241,16 +252,20 @@ class _HomePageState extends State<HomePage> {
                                     jadwalList[index].lecturer,
                                     style: h3,
                                   ),
-                                  Text(jadwalList[index].material,
+                                  Text(
+                                    jadwalList[index].material,
                                     style: h3,
                                   ),
-                                  Text(jadwalList[index].startedAt,
+                                  Text(
+                                    jadwalList[index].startedAt,
                                     style: h3,
                                   ),
-                                  Text(jadwalList[index].finishAt,
+                                  Text(
+                                    jadwalList[index].finishAt,
                                     style: h3,
                                   ),
-                                  Text(jadwalList[index].room,
+                                  Text(
+                                    jadwalList[index].room,
                                     style: h3,
                                   ),
                                   Text(
@@ -279,7 +294,7 @@ class _HomePageState extends State<HomePage> {
           const SizedBox(height: 24),
           user(),
           const SizedBox(height: 24),
-          jadwal()
+          isLoading ? loading : jadwal()
         ],
       ),
     );
