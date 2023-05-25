@@ -1,101 +1,208 @@
 import 'package:flutter/material.dart';
-import 'package:simak_uin_suka/theme.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:intl/intl.dart';
+import '../theme.dart';
+import 'qr_image.dart';
 
-class AturJadwalPage extends StatefulWidget {
-  const AturJadwalPage({Key? key}) : super(key: key);
+class GenerateQRCode extends StatefulWidget {
+  const GenerateQRCode({super.key});
 
   @override
-  State<AturJadwalPage> createState() => _AturJadwalPageState();
+  GenerateQRCodeState createState() => GenerateQRCodeState();
 }
 
-class _AturJadwalPageState extends State<AturJadwalPage> {
-  List kelas = []; //untuk menampung data dari API
-  String? selectedValue; //untuk menyimpan nilai yang dipilih
+class GenerateQRCodeState extends State<GenerateQRCode> {
+  TextEditingController materiController = TextEditingController();
+  TextEditingController ruangController = TextEditingController();
+  DateTime startTime = DateTime.now();
+  DateTime endTime = DateTime.now();
 
-
-  Future<String> getDataKelas() async {
-    var response = await http.get(
-        Uri.parse("https://dummyjson.com/products/1")); //ubah URL dengan URL API yang ingin diambil datanya
-    setState(() {
-      var dataJSON = json.decode(response.body);
-      kelas = dataJSON["products"]; //ubah "items" dengan key atau nama array yang menyimpan data dari API
-    });
-    return "Success!";
-  }
+  static const List<String> classes = <String>[
+    'Metode Pengembangan Perangkat Lunak A',
+    'Interaksi Manusia dan Komputer B',
+    'Perancangan Algoritma dan Pemrograman A',
+    'Grafis dan Visualisasi A',
+    'Perancangan Struktur Data A',
+    'Rekayasa Perangkat Lunak A',
+    'Basis Data A',
+  ];
+  String dropdownValue = classes.first;
 
   @override
   void initState() {
     super.initState();
-    getDataKelas();
+  }
+
+  @override
+  void dispose() {
+    materiController.dispose();
+    ruangController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-
-    Widget header() {
-      return Container(
-        alignment: AlignmentDirectional.centerStart,
-        height: 100,
-        width: double.infinity,
-        padding: EdgeInsets.symmetric(horizontal: defaultMargin),
-        decoration: BoxDecoration(
-            color: primaryColor,
-            borderRadius: const BorderRadius.only(
-              bottomLeft: Radius.circular(12),
-              bottomRight: Radius.circular(12),
-            )),
-        child: Text(
-          'Atur Jadwal',
-          style: h1,
-        ),
-      );
-    }
-
-    Widget aturjadwal() {
-      return Container(
-        margin: EdgeInsets.symmetric(horizontal: defaultMargin),
-        padding: EdgeInsets.all(defaultPadding),
-        decoration: BoxDecoration(color: primaryColor, borderRadius: BorderRadius.circular(12)),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Kelas', style: h2,),
-            Text('Pertemuan ke', style: h2,),
-            Text('Materi', style: h2,),
-            Text('Tanggal', style: h2,),
-            Text('Mulai', style: h2,),
-            Text('Selesai', style: h2,)
-          ],
-        ),
-      );
-    }
-
-    Widget daftarkelas() {
-      return DropdownButton(
-        hint: Text("Select item"), //text yang muncul pada DropdownButton ketika belum ada item yang dipilih
-        value: selectedValue,
-        onChanged: (newValue) {
-          setState(() {
-            selectedValue = newValue;
-          });
-        },
-        items: kelas.map((item) {
-          return DropdownMenuItem(
-            value: item['id'].toString(),
-            child: Text(item['title']), //ubah "id" dengan key atau nama yang ingin dijadikan nilai pada DropdownMenuItem
-          );
-        }).toList(),
-      );
-    }
-
     return Scaffold(
-      body: ListView(
-        // physics: NeverScrollableScrollPhysics(),
-        children: [header(), const SizedBox(height: 24), aturjadwal()],
+      appBar: AppBar(
+        title: const Text('Atur Jadwal Kelas'),
+        centerTitle: true,
+      ),
+      body: SingleChildScrollView(
+        child: Container(
+          margin: EdgeInsets.all(defaultMargin),
+          // padding: EdgeInsets.all(defaultPadding),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Pilih Kelas',
+                style: h2,
+              ),
+              DropdownButton<String>(
+                isExpanded: true,
+                value: dropdownValue,
+                // icon: const Icon(Icons.arrow_downward),
+                elevation: 8,
+                style: h3b,
+                underline: Container(
+                  height: 2,
+                  color: Colors.deepPurpleAccent,
+                ),
+                items: classes.map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+                onChanged: (String? value) {
+                  // This is called when the user selects an item.
+                  setState(() {
+                    dropdownValue = value!;
+                    print(dropdownValue);
+                  });
+                },
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              Text(
+                'Materi Perkuliahan',
+                style: h2,
+              ),
+              TextField(
+                controller: materiController,
+                decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Masukkan Materi Perkuliahan'),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  TextButton(
+                      onPressed: () {
+                        DatePicker.showDateTimePicker(context,
+                            showTitleActions: true,
+                            // Without maxTime
+                            minTime: DateTime.now(),
+                            onChanged: (date) {}, onConfirm: (date) {
+                          setState(() {
+                            startTime = date;
+                          });
+                        }, currentTime: DateTime.now(), locale: LocaleType.id);
+                      },
+                      child: const Text(
+                        'Pilih Waktu Mulai',
+                        style: TextStyle(color: Colors.blue),
+                      )),
+                  const Text('-'),
+                  TextButton(
+                      onPressed: () {
+                        DatePicker.showDateTimePicker(context,
+                            showTitleActions: true,
+                            // Without maxTime
+                            minTime: DateTime.now(),
+                            onChanged: (date) {}, onConfirm: (date) {
+                          setState(() {
+                            endTime = date;
+                          });
+                        }, currentTime: DateTime.now(), locale: LocaleType.id);
+                      },
+                      child: const Text(
+                        'Pilih Waktu Selesai',
+                        style: TextStyle(color: Colors.blue),
+                      )),
+                ],
+              ),
+              Text(
+                'Waktu mulai: ',
+                style: h3.copyWith(fontSize: 14),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    DateFormat("EEEE, d MMMM yyyy ", "id_ID").format(startTime),
+                    style: h3.copyWith(fontSize: 14),
+                  ),
+                  Text(
+                    DateFormat("HH:mm WIB", "id_ID").format(startTime),
+                    style: h3.copyWith(fontSize: 14),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              Text(
+                'Waktu selesai: ',
+                style: h3.copyWith(fontSize: 14),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    DateFormat("EEEE, d MMMM yyyy ", "id_ID").format(endTime),
+                    style: h3.copyWith(fontSize: 14),
+                  ),
+                  Text(
+                    DateFormat("HH:mm WIB", "id_ID").format(endTime),
+                    style: h3.copyWith(fontSize: 14),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              Text(
+                'Masukkan Ruang Perkuliahan',
+                style: h2,
+              ),
+              TextField(
+                controller: ruangController,
+                decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Ruang Perkuliahan'),
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              Center(
+                child: ElevatedButton(
+                    onPressed: () async {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: ((context) =>
+                              QRImage(qrData: materiController.text)),
+                        ),
+                      );
+                    },
+                    child: const Text('ATUR JADWAL')),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
 }
-

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/services.dart';
-// import 'package:simak_uin_suka/view/atur_jadwal_page.dart';
-import 'package:simak_uin_suka/view/generate_qr_code.dart';
+import 'package:simak_uin_suka/view/atur_jadwal_page.dart';
 import 'package:simak_uin_suka/view/scan_qr_code.dart';
 import 'home_page.dart';
 import 'profile_page.dart';
