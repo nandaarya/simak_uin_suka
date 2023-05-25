@@ -1,6 +1,9 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:simak_uin_suka/model/jadwalModel.dart';
 import '../theme.dart';
 import 'qr_image.dart';
 
@@ -26,7 +29,7 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
     'Rekayasa Perangkat Lunak A',
     'Basis Data A',
   ];
-  String dropdownValue = classes.first;
+  String dropdownClassValue = classes.first;
 
   @override
   void initState() {
@@ -38,6 +41,27 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
     materiController.dispose();
     ruangController.dispose();
     super.dispose();
+  }
+
+  Future<void> postJadwal(JadwalModel jadwal) async {
+    try {
+      var url = Uri.parse('https://simak-back-end.cyclic.app/api/' + 'jadwal');
+      var requestBody = jadwalModelToJson(jadwal);
+      var response = await http.post(url, headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      }, body: requestBody);
+      if (response.statusCode == 201) {
+        var jsonData = json.decode(response.body);
+        // Proses response atau lakukan operasi lain setelah POST berhasil
+        print('Jadwal berhasil dipost');
+        print(jsonData);
+      } else {
+        print('POST request gagal dengan status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Something went wrong while posting jadwal');
+      print(e);
+    }
   }
 
   @override
@@ -60,7 +84,7 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
               ),
               DropdownButton<String>(
                 isExpanded: true,
-                value: dropdownValue,
+                value: dropdownClassValue,
                 // icon: const Icon(Icons.arrow_downward),
                 elevation: 8,
                 style: h3b,
@@ -77,8 +101,8 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
                 onChanged: (String? value) {
                   // This is called when the user selects an item.
                   setState(() {
-                    dropdownValue = value!;
-                    print(dropdownValue);
+                    dropdownClassValue = value!;
+                    print(dropdownClassValue);
                   });
                 },
               ),
@@ -188,7 +212,17 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
               ),
               Center(
                 child: ElevatedButton(
-                    onPressed: () async {
+                    onPressed: () {
+                      JadwalModel jadwal = JadwalModel(
+                        classCode: '',
+                        className: dropdownClassValue,
+                        lecturer: 'Dosen',
+                        material: materiController.text,
+                        startedAt: startTime.toString(),
+                        finishAt: endTime.toString(),
+                        room: ruangController.text,
+                      );
+                      postJadwal(jadwal);
                       Navigator.push(
                         context,
                         MaterialPageRoute(
