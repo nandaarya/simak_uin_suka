@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:simak_uin_suka/theme.dart';
+import '../model/jadwalModel.dart';
+import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -9,6 +13,48 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  @override
+  void initState() {
+    super.initState();
+    getJadwal();
+  }
+
+  List<JadwalModel> jadwalList = [];
+
+  Future<void> getJadwal() async {
+    try {
+      var response = await http.get(Uri.parse('https://simak-back-end.cyclic.app/api/' + 'jadwal'));
+      if (response.statusCode == 200) {
+        var jsonData = json.decode(response.body);
+        if (jsonData["data"]["classes"] != null) {
+          List<dynamic> data = jsonData["data"]["classes"];
+          setState(() {
+            jadwalList.clear();
+            for (var element in data) {
+              JadwalModel jadwal = JadwalModel.fromJson(element);
+              jadwalList.add(jadwal);
+            }
+          });
+        }
+      }
+      for (var jadwal in jadwalList) {
+        print('classCode: ${jadwal.classCode}');
+        print('className: ${jadwal.className}');
+        print('lecturer: ${jadwal.lecturer}');
+        print('material: ${jadwal.material}');
+        print('startedAt: ${jadwal.startedAt}');
+        print('finishAt: ${jadwal.finishAt}');
+        print('room: ${jadwal.room}');
+        print('--------------');
+      }
+
+    } catch (e) {
+      print("Something went wrong while getting jadwal");
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     double widthDevice = MediaQuery.of(context).size.width;
@@ -97,64 +143,124 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               height: heightDevice,
               child: ListView.builder(
-                // controller: ScrollController(),
-                // physics: NeverScrollableScrollPhysics(),
-                  itemCount: 15,
-                  itemBuilder: (BuildContext context, int index) {
+                padding: const EdgeInsets.only(bottom: 320),
+                  // controller: ScrollController(),
+                  // physics: NeverScrollableScrollPhysics(),
+                  // shrinkWrap: true, // Mengatur agar ukuran ListView menyesuaikan dengan item yang terlihat
+                  // physics: ClampingScrollPhysics(), // Mengatur scroll dengan batas konten yang tersedia
+                  itemCount: jadwalList.length,
+                  itemBuilder: (context, index) {
                     return Container(
                       padding: EdgeInsets.all(defaultPadding),
-                      margin: EdgeInsets.only(
-                        bottom: defaultMargin
-                      ),
+                      margin: EdgeInsets.only(bottom: defaultMargin),
                       height: 160,
                       width: widthDevice,
                       decoration: BoxDecoration(
-                          color: primaryColor, borderRadius: BorderRadius.circular(12)),
+                          color: primaryColor,
+                          borderRadius: BorderRadius.circular(12)),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Perancangan Algoritma dan Pemrograman A', style: h3b,),
-                          const SizedBox(height: 8,),
+                          Text(
+                            jadwalList[index].className,
+                            style: h3b,
+                          ),
+                          const SizedBox(
+                            height: 8,
+                          ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Dosen', style: h3,),
-                                  Text('Materi', style: h3,),
-                                  Text('Mulai', style: h3,),
-                                  Text('Selesai', style: h3,),
-                                  Text('Ruang', style: h3,),
-                                  Text('Status', style: h3,)
+                                  Text(
+                                    'Dosen',
+                                    style: h3,
+                                  ),
+                                  Text(
+                                    'Materi',
+                                    style: h3,
+                                  ),
+                                  Text(
+                                    'Mulai',
+                                    style: h3,
+                                  ),
+                                  Text(
+                                    'Selesai',
+                                    style: h3,
+                                  ),
+                                  Text(
+                                    'Ruang',
+                                    style: h3,
+                                  ),
+                                  Text(
+                                    'Status',
+                                    style: h3,
+                                  )
                                 ],
                               ),
-                              const SizedBox(width: 8,),
+                              const SizedBox(
+                                width: 8,
+                              ),
                               Column(
                                 children: [
-                                  Text(':', style: h3,),
-                                  Text(':', style: h3,),
-                                  Text(':', style: h3,),
-                                  Text(':', style: h3,),
-                                  Text(':', style: h3,),
-                                  Text(':', style: h3,)
+                                  Text(
+                                    ':',
+                                    style: h3,
+                                  ),
+                                  Text(
+                                    ':',
+                                    style: h3,
+                                  ),
+                                  Text(
+                                    ':',
+                                    style: h3,
+                                  ),
+                                  Text(
+                                    ':',
+                                    style: h3,
+                                  ),
+                                  Text(
+                                    ':',
+                                    style: h3,
+                                  ),
+                                  Text(
+                                    ':',
+                                    style: h3,
+                                  )
                                 ],
                               ),
-                              const SizedBox(width: 8,),
+                              const SizedBox(
+                                width: 8,
+                              ),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Dwi Otik Kurniawati, M.Eng.', style: h3,),
-                                  Text('Hello World C++', style: h3,),
-                                  Text('09:38:00 WIB', style: h3,),
-                                  Text('09:38:00 WIB', style: h3,),
-                                  Text('FST 404', style: h3,),
-                                  Text('Hadir', style: h3,)
+                                  Text(
+                                    jadwalList[index].lecturer,
+                                    style: h3,
+                                  ),
+                                  Text(jadwalList[index].material,
+                                    style: h3,
+                                  ),
+                                  Text(jadwalList[index].startedAt,
+                                    style: h3,
+                                  ),
+                                  Text(jadwalList[index].finishAt,
+                                    style: h3,
+                                  ),
+                                  Text(jadwalList[index].room,
+                                    style: h3,
+                                  ),
+                                  Text(
+                                    'Hadir',
+                                    style: h3,
+                                  )
                                 ],
                               ),
                             ],
                           ),
-
                         ],
                       ),
                     );
@@ -168,7 +274,13 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: ListView(
         physics: const NeverScrollableScrollPhysics(),
-        children: [header(), const SizedBox(height: 24), user(), const SizedBox(height: 24), jadwal()],
+        children: [
+          header(),
+          const SizedBox(height: 24),
+          user(),
+          const SizedBox(height: 24),
+          jadwal()
+        ],
       ),
     );
   }

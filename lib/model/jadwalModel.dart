@@ -1,29 +1,46 @@
 import 'dart:convert';
 
-UserModel userModelFromJson(String str) => UserModel.fromJson(json.decode(str));
+JadwalModel jadwalModelFromJson(String str) =>
+    JadwalModel.fromJson(json.decode(str));
 
-String userModelToJson(UserModel data) => json.encode(data.toJson());
+String jadwalModelToJson(JadwalModel data) => json.encode(data.toJson());
 
-class UserModel {
-  UserModel({
-    required this.name,
-    required this.email,
-    required this.nim,
+class JadwalModel {
+  JadwalModel({
+    required this.classCode,
+    required this.className,
+    required this.lecturer,
+    required this.material,
+    required this.startedAt,
+    required this.finishAt,
+    required this.room,
   });
 
-  String name;
-  String email;
-  dynamic nim;
+  String classCode;
+  String className;
+  String lecturer;
+  String material;
+  String startedAt;
+  String finishAt;
+  String room;
 
-  factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
-    name: json["name"],
-    email: json["email"],
-    nim: json["address"],
+  factory JadwalModel.fromJson(Map<String, dynamic> json) => JadwalModel(
+    classCode: json["classCode"],
+    className: json["className"],
+    lecturer: json["lecturer"],
+    material: json["material"],
+    startedAt: json["startedAt"],
+    finishAt: json["finishAt"],
+    room: json["room"],
   );
 
   Map<String, dynamic> toJson() => {
-    "name": name,
-    "email": email,
-    "nim": nim,
+    "classCode": classCode,
+    "className": className,
+    "lecturer": lecturer,
+    "material": material,
+    "startedAt": startedAt,
+    "finishAt": finishAt,
+    "room": room,
   };
 }
