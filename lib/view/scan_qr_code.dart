@@ -1,8 +1,12 @@
+import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:simak_uin_suka/model/presensiModel.dart';
+import 'package:http/http.dart' as http;
+import 'package:simak_uin_suka/view/main_page.dart';
 
 class QRScanner extends StatefulWidget {
   const QRScanner({Key? key}) : super(key: key);
@@ -25,6 +29,33 @@ class _QRScannerState extends State<QRScanner> {
       controller!.pauseCamera();
     }
     controller!.resumeCamera();
+  }
+
+  Future<String?> postPresensi(PresensiModel presensi) async {
+    try {
+      var url =
+          Uri.parse('https://simak-back-end.cyclic.app/api/' + 'presensi');
+      var requestBody = presensiModelToJson(presensi);
+      var response = await http.post(url,
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          body: requestBody);
+      if (response.statusCode == 201) {
+        var jsonData = json.decode(response.body);
+        // Proses response atau lakukan operasi lain setelah POST berhasil
+        var message = jsonData['message'];
+        print('Presensi berhasil dipost');
+        print(jsonData);
+        return message;
+      } else {
+        print('POST request gagal dengan status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Something went wrong while posting presensi');
+      print(e);
+    }
+    return null;
   }
 
   @override
@@ -149,6 +180,20 @@ class _QRScannerState extends State<QRScanner> {
       setState(() {
         result = scanData;
       });
+      if (result?.code != null) {
+        this.controller?.stopCamera();
+        this.controller?.dispose();
+        PresensiModel presensi = PresensiModel(
+            nim: '21106050048', classCode: result!.code!, status: 'Hadir');
+        postPresensi(presensi).then((value) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: ((context) => MainPage()),
+            ),
+          );
+        });
+      }
     });
   }
 

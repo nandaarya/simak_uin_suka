@@ -1,4 +1,4 @@
-import 'package:another_flushbar/flushbar.dart';
+// import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -39,14 +39,14 @@ FontWeight medium = FontWeight.w500;
 FontWeight semiBold = FontWeight.w600;
 FontWeight bold = FontWeight.w700;
 
-Function failFlashBar = (BuildContext context, message) {
-  Flushbar(
-    message: message,
-    duration: const Duration(seconds: 2),
-    flushbarPosition: FlushbarPosition.TOP,
-    backgroundColor: Colors.red,
-  ).show(context);
-};
+// Function failFlashBar = (BuildContext context, message) {
+//   Flushbar(
+//     message: message,
+//     duration: const Duration(seconds: 2),
+//     flushbarPosition: FlushbarPosition.TOP,
+//     backgroundColor: Colors.red,
+//   ).show(context);
+// };
 //
 // Function successFlashBar = (BuildContext context, message) {
 //   Flushbar(

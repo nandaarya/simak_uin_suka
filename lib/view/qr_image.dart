@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:simak_uin_suka/view/main_page.dart';
 
 import '../theme.dart';
 
@@ -30,6 +31,15 @@ class QRImage extends StatelessWidget {
                   Text(qrData, style: h2, textAlign: TextAlign.center,),
                 ],
               ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const MainPage()),
+                );
+              },
+              child: const Text('Kembali ke Beranda'),
             ),
           ],
         ),
