@@ -6,6 +6,8 @@ import 'package:simak_uin_suka/theme.dart';
 import '../model/jadwalModel.dart';
 import 'package:http/http.dart' as http;
 
+import '../model/presensiModel.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -15,6 +17,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<JadwalModel> jadwalList = [];
+  List<PresensiModel> presensiList = [];
   bool isLoading = true;
 
   static const loading = Center(
@@ -28,6 +31,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     getJadwal();
+    getPresensi();
   }
 
   Future<void> getJadwal() async {
@@ -62,6 +66,35 @@ class _HomePageState extends State<HomePage> {
       }
     } catch (e) {
       print("Something went wrong while getting jadwal");
+      print(e);
+    }
+  }
+
+  Future<void> getPresensi() async {
+    try {
+      var response = await http.get(
+          Uri.parse('https://simak-back-end.cyclic.app/api/' + 'presensi'));
+      if (response.statusCode == 200) {
+        var jsonData = json.decode(response.body);
+        if (jsonData["data"]["attendances"] != null) {
+          List<dynamic> data = jsonData["data"]["attendances"];
+          setState(() {
+            presensiList.clear();
+            for (var element in data) {
+              PresensiModel presensi = PresensiModel.fromJson(element);
+              presensiList.add(presensi);
+            }
+          });
+        }
+      }
+      for (var presensi in presensiList) {
+        print('nim: ${presensi.nim}');
+        print('classCode: ${presensi.classCode}');
+        print('status: ${presensi.status}');
+        print('--------------');
+      }
+    } catch (e) {
+      print("Something went wrong while getting presensi");
       print(e);
     }
   }
@@ -269,7 +302,7 @@ class _HomePageState extends State<HomePage> {
                                     style: h3,
                                   ),
                                   Text(
-                                    'Hadir',
+                                    'Hadir/Tidak Hadir',
                                     style: h3,
                                   )
                                 ],
