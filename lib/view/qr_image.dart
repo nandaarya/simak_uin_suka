@@ -22,7 +22,15 @@ class QRImage extends StatelessWidget {
               data: qrData,
               size: 300,
             ),
-            Text('Kode Kelas: $qrData', style: h2,),
+            Container(
+              margin: EdgeInsets.all(defaultMargin),
+              child: Column(
+                children: [
+                  Text('Kode Kelas: ', style: h2,),
+                  Text(qrData, style: h2, textAlign: TextAlign.center,),
+                ],
+              ),
+            ),
           ],
         ),
       ),

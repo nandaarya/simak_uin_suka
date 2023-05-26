@@ -43,7 +43,7 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
     super.dispose();
   }
 
-  Future<void> postJadwal(JadwalModel jadwal) async {
+  Future<String?> postJadwal(JadwalModel jadwal) async {
     try {
       var url = Uri.parse('https://simak-back-end.cyclic.app/api/' + 'jadwal');
       var requestBody = jadwalModelToJson(jadwal);
@@ -53,10 +53,10 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
       if (response.statusCode == 201) {
         var jsonData = json.decode(response.body);
         // Proses response atau lakukan operasi lain setelah POST berhasil
-        var classCode = jsonData['classCode'];
+        var classCode = jsonData['data']['classCode'];
         print('Jadwal berhasil dipost');
         print(jsonData);
-        return(classCode);
+        return classCode;
       } else {
         print('POST request gagal dengan status code: ${response.statusCode}');
       }
@@ -224,14 +224,15 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
                         finishAt: endTime.toString(),
                         room: ruangController.text,
                       );
-                      postJadwal(jadwal);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: ((context) =>
-                              QRImage(qrData: materiController.text)),
-                        ),
-                      );
+                      postJadwal(jadwal).then((value) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: ((context) =>
+                                QRImage(qrData: value!)),
+                          ),
+                        );
+                      });
                     },
                     child: const Text('ATUR JADWAL')),
               ),
