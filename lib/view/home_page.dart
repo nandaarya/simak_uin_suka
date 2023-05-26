@@ -200,7 +200,11 @@ class _HomePageState extends State<HomePage> {
                       height: 160,
                       width: widthDevice,
                       decoration: BoxDecoration(
-                          color: primaryColor,
+                          color: presensiList.any((presensi) =>
+                                  presensi.classCode ==
+                                  jadwalList[index].classCode)
+                              ? Colors.green
+                              : primaryColor,
                           borderRadius: BorderRadius.circular(12)),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -302,7 +306,11 @@ class _HomePageState extends State<HomePage> {
                                     style: h3,
                                   ),
                                   Text(
-                                    'Hadir/Tidak Hadir',
+                                    presensiList.any((presensi) =>
+                                            presensi.classCode ==
+                                            jadwalList[index].classCode)
+                                        ? 'Hadir'
+                                        : 'Tidak Hadir',
                                     style: h3,
                                   )
                                 ],
