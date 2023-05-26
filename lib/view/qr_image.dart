@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
+import '../theme.dart';
+
 class QRImage extends StatelessWidget {
   final String qrData;
   const QRImage({super.key,required this.qrData});
@@ -13,9 +15,15 @@ class QRImage extends StatelessWidget {
         centerTitle: true,
       ),
       body: Center(
-        child: QrImage(
-          data: qrData,
-          size: 300,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            QrImage(
+              data: qrData,
+              size: 300,
+            ),
+            Text('Kode Kelas: $qrData', style: h2,),
+          ],
         ),
       ),
     );

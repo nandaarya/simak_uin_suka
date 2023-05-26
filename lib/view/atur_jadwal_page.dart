@@ -53,8 +53,10 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
       if (response.statusCode == 201) {
         var jsonData = json.decode(response.body);
         // Proses response atau lakukan operasi lain setelah POST berhasil
+        var classCode = jsonData['classCode'];
         print('Jadwal berhasil dipost');
         print(jsonData);
+        return(classCode);
       } else {
         print('POST request gagal dengan status code: ${response.statusCode}');
       }
