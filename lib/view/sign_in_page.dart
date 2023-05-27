@@ -5,8 +5,8 @@ import 'package:simak_uin_suka/theme.dart';
 import 'package:simak_uin_suka/view/main_page.dart';
 
 const users = {
-  'mahasiswa': 'mahasiswa',
-  'dosen': 'dosen',
+  'mahasiswa@gmail.com': 'mahasiswa',
+  'dosen@gmail.com': 'dosen',
 };
 
 class SignInPage extends StatelessWidget {

@@ -188,10 +188,6 @@ class _HomePageState extends State<HomePage> {
               height: heightDevice,
               child: ListView.builder(
                   padding: const EdgeInsets.only(bottom: 320),
-                  // controller: ScrollController(),
-                  // physics: NeverScrollableScrollPhysics(),
-                  // shrinkWrap: true, // Mengatur agar ukuran ListView menyesuaikan dengan item yang terlihat
-                  // physics: ClampingScrollPhysics(), // Mengatur scroll dengan batas konten yang tersedia
                   itemCount: jadwalList.length,
                   itemBuilder: (context, index) {
                     return Container(
