@@ -35,6 +35,7 @@ class _MainPageState extends State<MainPage> {
         floatingActionButton: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            //FAB1 fro Mahasiswa User
             FloatingActionButton(
               heroTag: 'FAB1',
               onPressed: () {
@@ -50,6 +51,7 @@ class _MainPageState extends State<MainPage> {
                 color: Colors.white,
               ),
             ),
+            //FAB2 fro Dosen User
             FloatingActionButton(
               heroTag: 'FAB2',
               // GenerateQRCode -> Atur Jadwal
