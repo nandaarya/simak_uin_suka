@@ -21,19 +21,25 @@ class DetailJadwalPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        QrImage(
-          data: classCode,
-          size: 300,
-        ),
-        Text(className),
-        Text(lecturer),
-        Text(material),
-        Text(startedAt),
-        Text(finishAt),
-        Text(room)
-      ],
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Detail Jadwal'),
+        centerTitle: true,
+      ),
+      body: Column(
+        children: [
+          QrImage(
+            data: classCode,
+            size: 300,
+          ),
+          Text(className),
+          Text(lecturer),
+          Text(material),
+          Text(startedAt),
+          Text(finishAt),
+          Text(room)
+        ],
+      ),
     );
   }
 }

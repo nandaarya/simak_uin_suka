@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:simak_uin_suka/theme.dart';
+import 'package:simak_uin_suka/view/detail_jadwal_page.dart';
 import '../model/jadwalModel.dart';
 import 'package:http/http.dart' as http;
 
@@ -191,8 +192,19 @@ class _HomePageState extends State<HomePage> {
                   itemCount: jadwalList.length,
                   itemBuilder: (context, index) {
                     return InkWell(
-                      onTap: (){
-
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => DetailJadwalPage(
+                                  classCode: jadwalList[index].classCode,
+                                  className: jadwalList[index].className,
+                                  lecturer: jadwalList[index].lecturer,
+                                  material: jadwalList[index].material,
+                                  startedAt: jadwalList[index].startedAt,
+                                  finishAt: jadwalList[index].finishAt,
+                                  room: jadwalList[index].room)),
+                        );
                       },
                       child: Container(
                         padding: EdgeInsets.all(defaultPadding),
