@@ -117,6 +117,7 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
               ),
               TextField(
                 controller: materiController,
+                maxLength: 30,
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Masukkan Materi Perkuliahan'),
@@ -205,6 +206,7 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
               ),
               TextField(
                 controller: ruangController,
+                maxLength: 30,
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Ruang Perkuliahan'),
