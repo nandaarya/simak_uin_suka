@@ -197,8 +197,6 @@ class _HomePageState extends State<HomePage> {
                       child: Container(
                         padding: EdgeInsets.all(defaultPadding),
                         margin: EdgeInsets.only(bottom: defaultMargin),
-                        // height make container size not flexible
-                        height: 160,
                         width: widthDevice,
                         decoration: BoxDecoration(
                             color: presensiList.any((presensi) =>
