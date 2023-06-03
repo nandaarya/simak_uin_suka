@@ -218,6 +218,7 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
                 child: ElevatedButton(
                     onPressed: () {
                       JadwalModel jadwal = JadwalModel(
+                        // classCode from response POST
                         classCode: '',
                         className: dropdownClassValue,
                         lecturer: 'Dosen',
@@ -226,6 +227,7 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
                         finishAt: endTime.toString(),
                         room: ruangController.text,
                       );
+                      // value is classCode From Response POST
                       postJadwal(jadwal).then((value) {
                         Navigator.push(
                           context,
