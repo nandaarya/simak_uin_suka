@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:simak_uin_suka/model/jadwalModel.dart';
+import 'package:simak_uin_suka/view/detail_jadwal_page.dart';
 import '../theme.dart';
-import 'qr_image.dart';
 
 class GenerateQRCode extends StatefulWidget {
   const GenerateQRCode({super.key});
@@ -47,9 +47,11 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
     try {
       var url = Uri.parse('https://simak-back-end.cyclic.app/api/' + 'jadwal');
       var requestBody = jadwalModelToJson(jadwal);
-      var response = await http.post(url, headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      }, body: requestBody);
+      var response = await http.post(url,
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          body: requestBody);
       if (response.statusCode == 201) {
         var jsonData = json.decode(response.body);
         // Proses response atau lakukan operasi lain setelah POST berhasil
@@ -64,6 +66,7 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
       print('Something went wrong while posting jadwal');
       print(e);
     }
+    return null;
   }
 
   @override
@@ -223,8 +226,8 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
                         className: dropdownClassValue,
                         lecturer: 'Dosen',
                         material: materiController.text,
-                        startedAt: startTime.toString(),
-                        finishAt: endTime.toString(),
+                        startedAt: DateFormat("EEEE, d MMMM yyyy    HH:mm WIB", "id_ID").format(startTime).toString(),
+                        finishAt: DateFormat("EEEE, d MMMM yyyy    HH:mm WIB", "id_ID").format(endTime).toString(),
                         room: ruangController.text,
                       );
                       // value is classCode From Response POST
@@ -232,8 +235,14 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: ((context) =>
-                                QRImage(qrData: value!)),
+                            builder: ((context) => DetailJadwalPage(
+                                classCode: value!,
+                                className: dropdownClassValue,
+                                lecturer: 'Dosen',
+                                material: materiController.text,
+                                startedAt: DateFormat("EEEE, d MMMM yyyy    HH:mm WIB", "id_ID").format(startTime).toString(),
+                                finishAt: DateFormat("EEEE, d MMMM yyyy    HH:mm WIB", "id_ID").format(endTime).toString(),
+                                room: ruangController.text)),
                           ),
                         );
                       });
