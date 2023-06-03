@@ -7,6 +7,7 @@ import 'package:simak_uin_suka/view/main_page.dart';
 const users = {
   'mahasiswa@gmail.com': 'mahasiswa',
   'dosen@gmail.com': 'dosen',
+  '21106050048': '21106050048'
 };
 
 class SignInPage extends StatelessWidget {
@@ -44,11 +45,19 @@ class SignInPage extends StatelessWidget {
     });
   }
 
+  String? _usernameValidator(String? username) {
+    if (username == null || username.isEmpty) {
+      return 'Masukkan NIM/NIP';
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return FlutterLogin(
       loginAfterSignUp: true,
       userType: LoginUserType.name,
+      userValidator: _usernameValidator,
       title: 'SIMAK UIN SUKA',
       logo: const AssetImage('assets/images/logo_uin.png'),
       messages: LoginMessages(
@@ -61,19 +70,19 @@ class SignInPage extends StatelessWidget {
       ),
       onLogin: _authUser,
       onSignup: _signupUser,
-
-      loginProviders: <LoginProvider>[
-        LoginProvider(
-          icon: FontAwesomeIcons.google,
-          label: 'Google',
-          callback: () async {
-            debugPrint('start google sign in');
-            await Future.delayed(loginTime);
-            debugPrint('stop google sign in');
-            return null;
-          },
-        ),
-      ],
+      //
+      // loginProviders: <LoginProvider>[
+      //   LoginProvider(
+      //     icon: FontAwesomeIcons.google,
+      //     label: 'Google',
+      //     callback: () async {
+      //       debugPrint('start google sign in');
+      //       await Future.delayed(loginTime);
+      //       debugPrint('stop google sign in');
+      //       return null;
+      //     },
+      //   ),
+      // ],
       onSubmitAnimationCompleted: () {
         Navigator.of(context).pushReplacement(MaterialPageRoute(
           builder: (context) => const MainPage(),

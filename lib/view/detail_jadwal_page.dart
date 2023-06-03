@@ -30,111 +30,119 @@ class DetailJadwalPage extends StatelessWidget {
         centerTitle: true,
       ),
       body: Container(
-        margin: EdgeInsets.all(defaultMargin),
-        padding: EdgeInsets.all(defaultPadding),
+        margin: EdgeInsets.symmetric(vertical: defaultMargin),
         child: Column(
           children: [
             Text('QR Presensi', style: h2,),
             const SizedBox(height: 16,),
             QrImage(
               data: classCode,
+              version: 3,
               size: 300,
+              // embeddedImage: AssetImage('assets/images/logo_uin.png'),
+              // embeddedImageStyle: QrEmbeddedImageStyle(
+              //   size: Size(80, 80),
+              // ),
             ),
             const SizedBox(height: 16,),
-            Column(
-              children: [
-                Text(
-                  className,
-                  style: h3b,
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                Row(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Dosen',
-                          style: h3,
-                        ),
-                        Text(
-                          'Materi',
-                          style: h3,
-                        ),
-                        Text(
-                          'Mulai',
-                          style: h3,
-                        ),
-                        Text(
-                          'Selesai',
-                          style: h3,
-                        ),
-                        Text(
-                          'Ruang',
-                          style: h3,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      width: 8,
-                    ),
-                    Column(
-                      children: [
-                        Text(
-                          ':',
-                          style: h3,
-                        ),
-                        Text(
-                          ':',
-                          style: h3,
-                        ),
-                        Text(
-                          ':',
-                          style: h3,
-                        ),
-                        Text(
-                          ':',
-                          style: h3,
-                        ),
-                        Text(
-                          ':',
-                          style: h3,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      width: 8,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          lecturer,
-                          style: h3,
-                        ),
-                        Text(
-                          material,
-                          style: h3,
-                        ),
-                        Text(
-                          startedAt,
-                          style: h3,
-                        ),
-                        Text(
-                          finishAt,
-                          style: h3,
-                        ),
-                        Text(
-                          room,
-                          style: h3,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ],
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: defaultMargin),
+              padding: EdgeInsets.symmetric(horizontal: defaultPadding),
+              child: Column(
+                children: [
+                  Text(
+                    className,
+                    style: h3b,
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  Row(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Dosen',
+                            style: h3,
+                          ),
+                          Text(
+                            'Materi',
+                            style: h3,
+                          ),
+                          Text(
+                            'Mulai',
+                            style: h3,
+                          ),
+                          Text(
+                            'Selesai',
+                            style: h3,
+                          ),
+                          Text(
+                            'Ruang',
+                            style: h3,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        width: 8,
+                      ),
+                      Column(
+                        children: [
+                          Text(
+                            ':',
+                            style: h3,
+                          ),
+                          Text(
+                            ':',
+                            style: h3,
+                          ),
+                          Text(
+                            ':',
+                            style: h3,
+                          ),
+                          Text(
+                            ':',
+                            style: h3,
+                          ),
+                          Text(
+                            ':',
+                            style: h3,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        width: 8,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            lecturer,
+                            style: h3,
+                          ),
+                          Text(
+                            material,
+                            style: h3,
+                          ),
+                          Text(
+                            startedAt,
+                            style: h3,
+                          ),
+                          Text(
+                            finishAt,
+                            style: h3,
+                          ),
+                          Text(
+                            room,
+                            style: h3,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
             const SizedBox(height: 16,),
             ElevatedButton(

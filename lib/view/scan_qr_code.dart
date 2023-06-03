@@ -208,6 +208,7 @@ class _QRScannerState extends State<QRScanner> {
 
   @override
   void dispose() {
+    controller?.stopCamera();
     controller?.dispose();
     super.dispose();
   }
