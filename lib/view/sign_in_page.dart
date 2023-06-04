@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_login/flutter_login.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simak_uin_suka/theme.dart';
 import 'package:simak_uin_suka/view/main_page.dart';
 
@@ -33,8 +34,16 @@ class SignInPage extends StatelessWidget {
           body: requestBody);
       var jsonData = json.decode(response.body);
       if (response.statusCode == 200) {
-        // Proses response atau lakukan operasi lain setelah POST berhasil
-        // var classCode = jsonData['data']['classCode'];
+        print(jsonData['data']['user']['username']);
+        print(jsonData['data']['user']['password']);
+        print(jsonData['data']['user']['nama']);
+        try {
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          prefs.setString('username', jsonData['data']['user']['username']);
+          print(prefs.getString('username'));
+        } catch (e) {
+          print('Error accessing SharedPreferences: $e');
+        }
         print('Berhasil Login');
         print(jsonData);
         return null;
