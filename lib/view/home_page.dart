@@ -187,152 +187,161 @@ class _HomePageState extends State<HomePage> {
             ),
             SizedBox(
               height: heightDevice,
-              child: ListView.builder(
-                  padding: const EdgeInsets.only(bottom: 320),
-                  itemCount: jadwalList.length,
-                  itemBuilder: (context, index) {
-                    return InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => DetailJadwalPage(
-                                  classCode: jadwalList[index].classCode,
-                                  className: jadwalList[index].className,
-                                  lecturer: jadwalList[index].lecturer,
-                                  material: jadwalList[index].material,
-                                  startedAt: jadwalList[index].startedAt,
-                                  finishAt: jadwalList[index].finishAt,
-                                  room: jadwalList[index].room)),
-                        );
-                      },
-                      child: Container(
-                        padding: EdgeInsets.all(defaultPadding),
-                        margin: EdgeInsets.only(bottom: defaultMargin),
-                        width: widthDevice,
-                        decoration: BoxDecoration(
-                            color: presensiList.any((presensi) =>
-                                    presensi.classCode ==
-                                    jadwalList[index].classCode)
-                                ? Colors.green
-                                : primaryColor,
-                            borderRadius: BorderRadius.circular(12)),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              jadwalList[index].className,
-                              style: h3b,
-                            ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Dosen',
-                                      style: h3,
-                                    ),
-                                    Text(
-                                      'Materi',
-                                      style: h3,
-                                    ),
-                                    Text(
-                                      'Mulai',
-                                      style: h3,
-                                    ),
-                                    Text(
-                                      'Selesai',
-                                      style: h3,
-                                    ),
-                                    Text(
-                                      'Ruang',
-                                      style: h3,
-                                    ),
-                                    Text(
-                                      'Status',
-                                      style: h3,
-                                    )
-                                  ],
-                                ),
-                                const SizedBox(
-                                  width: 8,
-                                ),
-                                Column(
-                                  children: [
-                                    Text(
-                                      ':',
-                                      style: h3,
-                                    ),
-                                    Text(
-                                      ':',
-                                      style: h3,
-                                    ),
-                                    Text(
-                                      ':',
-                                      style: h3,
-                                    ),
-                                    Text(
-                                      ':',
-                                      style: h3,
-                                    ),
-                                    Text(
-                                      ':',
-                                      style: h3,
-                                    ),
-                                    Text(
-                                      ':',
-                                      style: h3,
-                                    )
-                                  ],
-                                ),
-                                const SizedBox(
-                                  width: 8,
-                                ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      jadwalList[index].lecturer,
-                                      style: h3,
-                                    ),
-                                    Text(
-                                      jadwalList[index].material,
-                                      style: h3,
-                                    ),
-                                    Text(
-                                      jadwalList[index].startedAt,
-                                      style: h3,
-                                    ),
-                                    Text(
-                                      jadwalList[index].finishAt,
-                                      style: h3,
-                                    ),
-                                    Text(
-                                      jadwalList[index].room,
-                                      style: h3,
-                                    ),
-                                    Text(
-                                      presensiList.any((presensi) =>
-                                              presensi.classCode ==
-                                              jadwalList[index].classCode)
-                                          ? 'Hadir'
-                                          : 'Tidak Hadir',
-                                      style: h3,
-                                    )
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ],
+              child: RefreshIndicator(
+                onRefresh: () async {
+                  setState(() {
+                    isLoading = true;
+                  });
+                  await getJadwal();
+                  await getPresensi();
+                },
+                child: ListView.builder(
+                    padding: const EdgeInsets.only(bottom: 320),
+                    itemCount: jadwalList.length,
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => DetailJadwalPage(
+                                    classCode: jadwalList[index].classCode,
+                                    className: jadwalList[index].className,
+                                    lecturer: jadwalList[index].lecturer,
+                                    material: jadwalList[index].material,
+                                    startedAt: jadwalList[index].startedAt,
+                                    finishAt: jadwalList[index].finishAt,
+                                    room: jadwalList[index].room)),
+                          );
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(defaultPadding),
+                          margin: EdgeInsets.only(bottom: defaultMargin),
+                          width: widthDevice,
+                          decoration: BoxDecoration(
+                              color: presensiList.any((presensi) =>
+                                      presensi.classCode ==
+                                      jadwalList[index].classCode)
+                                  ? Colors.green
+                                  : primaryColor,
+                              borderRadius: BorderRadius.circular(12)),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                jadwalList[index].className,
+                                style: h3b,
+                              ),
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Dosen',
+                                        style: h3,
+                                      ),
+                                      Text(
+                                        'Materi',
+                                        style: h3,
+                                      ),
+                                      Text(
+                                        'Mulai',
+                                        style: h3,
+                                      ),
+                                      Text(
+                                        'Selesai',
+                                        style: h3,
+                                      ),
+                                      Text(
+                                        'Ruang',
+                                        style: h3,
+                                      ),
+                                      Text(
+                                        'Status',
+                                        style: h3,
+                                      )
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    width: 8,
+                                  ),
+                                  Column(
+                                    children: [
+                                      Text(
+                                        ':',
+                                        style: h3,
+                                      ),
+                                      Text(
+                                        ':',
+                                        style: h3,
+                                      ),
+                                      Text(
+                                        ':',
+                                        style: h3,
+                                      ),
+                                      Text(
+                                        ':',
+                                        style: h3,
+                                      ),
+                                      Text(
+                                        ':',
+                                        style: h3,
+                                      ),
+                                      Text(
+                                        ':',
+                                        style: h3,
+                                      )
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    width: 8,
+                                  ),
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        jadwalList[index].lecturer,
+                                        style: h3,
+                                      ),
+                                      Text(
+                                        jadwalList[index].material,
+                                        style: h3,
+                                      ),
+                                      Text(
+                                        jadwalList[index].startedAt,
+                                        style: h3,
+                                      ),
+                                      Text(
+                                        jadwalList[index].finishAt,
+                                        style: h3,
+                                      ),
+                                      Text(
+                                        jadwalList[index].room,
+                                        style: h3,
+                                      ),
+                                      Text(
+                                        presensiList.any((presensi) =>
+                                                presensi.classCode ==
+                                                jadwalList[index].classCode)
+                                            ? 'Hadir'
+                                            : 'Tidak Hadir',
+                                        style: h3,
+                                      )
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                  }),
+                      );
+                    }),
+              ),
             ),
           ],
         ),
