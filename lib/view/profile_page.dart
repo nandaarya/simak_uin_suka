@@ -162,9 +162,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 AwesomeDialog(
                   context: context,
                   dialogType: DialogType.infoReverse,
-                  borderSide: BorderSide(color: Colors.green, width: 2),
+                  borderSide: const BorderSide(color: Colors.green, width: 2),
                   width: double.infinity * 0.9,
-                  buttonsBorderRadius: BorderRadius.all(Radius.circular(2)),
+                  buttonsBorderRadius: const BorderRadius.all(Radius.circular(2)),
                   headerAnimationLoop: false,
                   animType: AnimType.bottomSlide,
                   title: 'INFO',
@@ -173,7 +173,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   btnCancelOnPress: () {},
                   btnOkOnPress: () {
                     removeLocalData().whenComplete(() => Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => SignInPage())));
+                        MaterialPageRoute(builder: (context) => const SignInPage())));
                   },
                 ).show();
               },
