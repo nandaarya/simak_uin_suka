@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simak_uin_suka/theme.dart';
@@ -34,21 +33,30 @@ class SignInPage extends StatelessWidget {
           body: requestBody);
       var jsonData = json.decode(response.body);
       if (response.statusCode == 200) {
-        print(jsonData['data']['user']['username']);
-        print(jsonData['data']['user']['password']);
-        print(jsonData['data']['user']['nama']);
+        // print(jsonData['data']['user']['username']);
+        // print(jsonData['data']['user']['password']);
+        // print(jsonData['data']['user']['nama']);
         try {
           SharedPreferences prefs = await SharedPreferences.getInstance();
           prefs.setString('username', jsonData['data']['user']['username']);
-          print(prefs.getString('username'));
+          prefs.setString('password', jsonData['data']['user']['password']);
+          prefs.setString('name', jsonData['data']['user']['name']);
+          prefs.setString('nim_nip', jsonData['data']['user']['nim_nip']);
+          prefs.setString('role', jsonData['data']['user']['role']);
+
+          debugPrint("Data username lokal: ${prefs.getString('username')}");
+          debugPrint("Data password lokal: ${prefs.getString('password')}");
+          debugPrint("Data nama lokal: ${prefs.getString('name')}");
+          debugPrint("Data nim_nip lokal: ${prefs.getString('nim_nip')}");
+          debugPrint("Data role lokal: ${prefs.getString('role')}");
         } catch (e) {
-          print('Error accessing SharedPreferences: $e');
+          debugPrint('Error accessing SharedPreferences: $e');
         }
-        print('Berhasil Login');
+        debugPrint('Berhasil Login');
         print(jsonData);
         return null;
       } else {
-        print('POST request gagal dengan status code: ${response.statusCode}');
+        debugPrint('POST request gagal dengan status code: ${response.statusCode}');
         return jsonData['message'];
       }
     } catch (e) {

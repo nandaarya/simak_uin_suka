@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simak_uin_suka/theme.dart';
 import 'package:simak_uin_suka/view/detail_jadwal_page.dart';
 import '../model/jadwalModel.dart';
@@ -20,6 +21,9 @@ class _HomePageState extends State<HomePage> {
   List<JadwalModel> jadwalList = [];
   List<PresensiModel> presensiList = [];
   bool isLoading = true;
+  String? name;
+  // ignore: non_constant_identifier_names
+  String? nim_nip;
 
   static const loading = Center(
       heightFactor: 2.0,
@@ -31,8 +35,18 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    getLocalData();
     getJadwal();
     getPresensi();
+  }
+
+  Future<void> getLocalData() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      name = prefs.getString('name');
+      nim_nip = prefs.getString('nim_nip');
+    });
   }
 
   Future<void> getJadwal() async {
@@ -55,16 +69,16 @@ class _HomePageState extends State<HomePage> {
       setState(() {
         isLoading = false;
       });
-      for (var jadwal in jadwalList) {
-        print('classCode: ${jadwal.classCode}');
-        print('className: ${jadwal.className}');
-        print('lecturer: ${jadwal.lecturer}');
-        print('material: ${jadwal.material}');
-        print('startedAt: ${jadwal.startedAt}');
-        print('finishAt: ${jadwal.finishAt}');
-        print('room: ${jadwal.room}');
-        print('--------------');
-      }
+      // for (var jadwal in jadwalList) {
+      //   print('classCode: ${jadwal.classCode}');
+      //   print('className: ${jadwal.className}');
+      //   print('lecturer: ${jadwal.lecturer}');
+      //   print('material: ${jadwal.material}');
+      //   print('startedAt: ${jadwal.startedAt}');
+      //   print('finishAt: ${jadwal.finishAt}');
+      //   print('room: ${jadwal.room}');
+      //   print('--------------');
+      // }
     } catch (e) {
       print("Something went wrong while getting jadwal");
       print(e);
@@ -88,12 +102,12 @@ class _HomePageState extends State<HomePage> {
           });
         }
       }
-      for (var presensi in presensiList) {
-        print('nim: ${presensi.nim}');
-        print('classCode: ${presensi.classCode}');
-        print('status: ${presensi.status}');
-        print('--------------');
-      }
+      // for (var presensi in presensiList) {
+      //   print('nim: ${presensi.nim}');
+      //   print('classCode: ${presensi.classCode}');
+      //   print('status: ${presensi.status}');
+      //   print('--------------');
+      // }
     } catch (e) {
       print("Something went wrong while getting presensi");
       print(e);
@@ -155,11 +169,11 @@ class _HomePageState extends State<HomePage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Nanda Arya Putra',
+                        name ?? 'Nama Tidak Tersedia',
                         style: h3,
                       ),
                       Text(
-                        '21106050048',
+                        nim_nip ?? 'NIM/NIP Tidak Tersedia',
                         style: h3,
                       )
                     ],
