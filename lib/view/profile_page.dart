@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:simak_uin_suka/theme.dart';
 
@@ -112,7 +113,25 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                AwesomeDialog(
+                  context: context,
+                  dialogType: DialogType.infoReverse,
+                  borderSide: BorderSide(color: Colors.green, width: 2),
+                  width: double.infinity * 0.9,
+                  buttonsBorderRadius: BorderRadius.all(Radius.circular(2)),
+                  headerAnimationLoop: false,
+                  animType: AnimType.bottomSlide,
+                  title: 'INFO',
+                  desc: 'Apakah anda yakin ingin keluar?',
+                  showCloseIcon: true,
+                  btnCancelOnPress: () {},
+                  btnOkOnPress: () {
+                    // logindata.setBool('login', true);
+                    // Navigator.of(context).pushNamed('/signIn_page');
+                  },
+                ).show();
+              },
               child: Column(
                 children: [
                   Row(
@@ -127,7 +146,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   Container(height: 1, color: primaryColor,),
                 ],
               ),
-            )
+            ),
           ],
         ),
       );
