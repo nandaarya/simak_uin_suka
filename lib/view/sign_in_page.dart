@@ -40,12 +40,14 @@ class SignInPage extends StatelessWidget {
           SharedPreferences prefs = await SharedPreferences.getInstance();
           prefs.setString('username', jsonData['data']['user']['username']);
           prefs.setString('password', jsonData['data']['user']['password']);
+          prefs.setString('email', jsonData['data']['user']['email']);
           prefs.setString('name', jsonData['data']['user']['name']);
           prefs.setString('nim_nip', jsonData['data']['user']['nim_nip']);
           prefs.setString('role', jsonData['data']['user']['role']);
 
           debugPrint("Data username lokal: ${prefs.getString('username')}");
           debugPrint("Data password lokal: ${prefs.getString('password')}");
+          debugPrint("Data email lokal: ${prefs.getString('email')}");
           debugPrint("Data nama lokal: ${prefs.getString('name')}");
           debugPrint("Data nim_nip lokal: ${prefs.getString('nim_nip')}");
           debugPrint("Data role lokal: ${prefs.getString('role')}");

@@ -1,5 +1,6 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simak_uin_suka/theme.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -10,10 +11,15 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+
+  Future<void> removeLocalData () async {
+    WidgetsFlutterBinding.ensureInitialized();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove('');
+  }
+
   @override
   Widget build(BuildContext context) {
-
-
     Widget header() {
       return Container(
         alignment: AlignmentDirectional.centerStart,
