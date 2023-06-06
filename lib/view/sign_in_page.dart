@@ -216,10 +216,14 @@ class _SignInPageState extends State<SignInPage> {
         UserFormField(
           keyName: 'role',
           displayName: 'Role',
+          defaultValue: 'mahasiswa',
           icon: Icon(FontAwesomeIcons.users),
           fieldValidator: (value) {
             if (value == null || value.isEmpty) {
               return 'Masukkan role Anda!';
+            }
+            if (value != 'mahasiswa' && value != 'dosen') {
+              return 'Role harus mahasiswa atau dosen!';
             }
             return null;
           },

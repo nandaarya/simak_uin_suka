@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simak_uin_suka/view/atur_jadwal_page.dart';
 import 'package:simak_uin_suka/view/scan_qr_code.dart';
 import 'home_page.dart';
@@ -17,6 +18,21 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int currentIndex = 0;
+  String? role;
+
+  @override
+  void initState() {
+    getLocalData();
+    super.initState();
+  }
+
+  Future<void> getLocalData() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      role = prefs.getString('role');
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,44 +48,43 @@ class _MainPageState extends State<MainPage> {
       },
       child: Scaffold(
         body: widgets[currentIndex],
-        floatingActionButton: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            //FAB1 fro Mahasiswa User
+        // cek apakah role mahasiswa atau bukan (dosen)
+        floatingActionButton: role == 'mahasiswa'
+            ?
+            //FAB1 for Mahasiswa User
             FloatingActionButton(
-              heroTag: 'FAB1',
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    PageTransition(
-                        child: const QRScanner(),
-                        type: PageTransitionType.bottomToTop));
-              },
-              backgroundColor: secondaryColor,
-              child: const Icon(
-                Icons.camera_alt,
-                color: Colors.white,
-              ),
-            ),
-            //FAB2 fro Dosen User
+                heroTag: 'FAB1',
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      PageTransition(
+                          child: const QRScanner(),
+                          type: PageTransitionType.bottomToTop));
+                },
+                backgroundColor: secondaryColor,
+                child: const Icon(
+                  Icons.camera_alt,
+                  color: Colors.white,
+                ),
+              )
+            :
+            //FAB2 for Dosen User
             FloatingActionButton(
-              heroTag: 'FAB2',
-              // GenerateQRCode -> Atur Jadwal
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    PageTransition(
-                        child: const GenerateQRCode(),
-                        type: PageTransitionType.bottomToTop));
-              },
-              backgroundColor: secondaryColor,
-              child: const Icon(
-                Icons.add,
-                color: Colors.white,
+                heroTag: 'FAB2',
+                // GenerateQRCode -> Atur Jadwal
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      PageTransition(
+                          child: const GenerateQRCode(),
+                          type: PageTransitionType.bottomToTop));
+                },
+                backgroundColor: secondaryColor,
+                child: const Icon(
+                  Icons.add,
+                  color: Colors.white,
+                ),
               ),
-            ),
-          ],
-        ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         bottomNavigationBar: ConvexAppBar(
             style: TabStyle.textIn,
