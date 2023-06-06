@@ -100,7 +100,14 @@ class _SignInPageState extends State<SignInPage> {
 
   Future<String?> _signupUser(SignupData data) {
     debugPrint(
-        'Signup Name: ${data.name}, Password: ${data.password}, Email: ${data.additionalSignupData}');
+        'Signup Name: ${data.name}, Password: ${data.password}, ${data.additionalSignupData}');
+    // final additionalData = data.additionalSignupData;
+    // final email = additionalData['email'];
+    // final fullName = additionalData['fullName'];
+    // final nimNip = additionalData['nim_nip'];
+    // final role = additionalData['role'];
+    //
+    // debugPrint('Email: $email, Full Name: $fullName, NIM/NIP: $nimNip, Role: $role');
     return Future.delayed(loginTime).then((_) {
       return null;
     });
@@ -140,26 +147,50 @@ class _SignInPageState extends State<SignInPage> {
         authButtonPadding: EdgeInsets.all(2 * defaultPadding),
       ),
       hideForgotPasswordButton: true,
-      additionalSignupFields: const [
+      additionalSignupFields: [
         UserFormField(
           keyName: 'email',
           displayName: 'Email',
           icon: Icon(FontAwesomeIcons.envelope),
+          fieldValidator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Masukkan email Anda!';
+            }
+            return null;
+          },
         ),
         UserFormField(
           keyName: 'fullName',
           displayName: 'Nama',
           icon: Icon(FontAwesomeIcons.user),
+          fieldValidator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Masukkan nama Anda!';
+            }
+            return null;
+          },
         ),
         UserFormField(
           keyName: 'nim_nip',
           displayName: 'NIM / NIP',
           icon: Icon(FontAwesomeIcons.idCard),
+          fieldValidator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Masukkan NIM/NIP Anda!';
+            }
+            return null;
+          },
         ),
         UserFormField(
           keyName: 'role',
           displayName: 'Role',
           icon: Icon(FontAwesomeIcons.users),
+          fieldValidator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Masukkan role Anda!';
+            }
+            return null;
+          },
         ),
       ],
       onLogin: _authUser,
