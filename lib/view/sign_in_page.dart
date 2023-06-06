@@ -98,19 +98,46 @@ class _SignInPageState extends State<SignInPage> {
     return null;
   }
 
-  Future<String?> _signupUser(SignupData data) {
+  Future<String?> _signupUser(SignupData data) async {
     debugPrint(
         'Signup Name: ${data.name}, Password: ${data.password}, ${data.additionalSignupData}');
-    // final additionalData = data.additionalSignupData;
-    // final email = additionalData['email'];
-    // final fullName = additionalData['fullName'];
-    // final nimNip = additionalData['nim_nip'];
-    // final role = additionalData['role'];
-    //
-    // debugPrint('Email: $email, Full Name: $fullName, NIM/NIP: $nimNip, Role: $role');
-    return Future.delayed(loginTime).then((_) {
-      return null;
-    });
+    final additionalData = data.additionalSignupData!;
+    final email = additionalData['email'].toString();
+    final fullName = additionalData['fullName'].toString();
+    final nimNip = additionalData['nim_nip'].toString();
+    final role = additionalData['role'].toString();
+
+    debugPrint('Email: $email, Full Name: $fullName, NIM/NIP: $nimNip, Role: $role');
+    try {
+      var url = Uri.parse('https://simak-back-end.cyclic.app/api/users/' + 'register');
+      var requestBody = json.encode({
+        "username": data.name,
+        "password": data.password,
+        "email": email,
+        "name": fullName,
+        "nim_nip": nimNip,
+        "role": role,
+      });
+      var response = await http.post(url,
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          body: requestBody);
+      if (response.statusCode == 201) {
+        var jsonData = json.decode(response.body);
+        // Proses response atau lakukan operasi lain setelah POST berhasil;
+        debugPrint('Akun berhasil ditambahkan');
+        print(jsonData);
+        return null;
+      } else {
+        debugPrint('POST request gagal dengan status code: ${response.statusCode}');
+        return 'Akun gagal ditambahkan';
+      }
+    } catch (e) {
+      print('Something went wrong while adding user');
+      print(e);
+    }
+    return null;
   }
 
   Future<String?> _recoverPassword(String name) {
