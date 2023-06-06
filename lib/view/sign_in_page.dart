@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
@@ -135,7 +136,19 @@ class _SignInPageState extends State<SignInPage> {
         headerMargin: defaultMargin,
         authButtonPadding: EdgeInsets.all(2 * defaultPadding),
       ),
+      hideForgotPasswordButton: true,
       onLogin: _authUser,
+      additionalSignupFields: const [
+        UserFormField(
+          keyName: 'email',
+          displayName: 'Nama',
+          userType: LoginUserType.name,
+          icon: Icon(FontAwesomeIcons.envelope),
+        ),
+        UserFormField(keyName: 'name'),
+        UserFormField(keyName: 'nim_nip'),
+        UserFormField(keyName: 'role'),
+      ],
       onSignup: _signupUser,
       //
       // loginProviders: <LoginProvider>[
