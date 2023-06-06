@@ -169,7 +169,7 @@ class _SignInPageState extends State<SignInPage> {
       title: 'SIMAK UIN SUKA',
       logo: const AssetImage('assets/images/logo_uin.png'),
       messages: LoginMessages(
-          userHint: 'NIM / NIP', signUpSuccess: 'Akun berhasil didaftarkan'),
+          userHint: 'Username', signUpSuccess: 'Akun berhasil didaftarkan'),
       theme: LoginTheme(
         titleStyle: h1,
         headerMargin: defaultMargin,
@@ -215,15 +215,14 @@ class _SignInPageState extends State<SignInPage> {
         ),
         UserFormField(
           keyName: 'role',
-          displayName: 'Role',
-          defaultValue: 'mahasiswa',
+          displayName: 'Status (mahasiswa/dosen)',
           icon: Icon(FontAwesomeIcons.users),
           fieldValidator: (value) {
             if (value == null || value.isEmpty) {
               return 'Masukkan role Anda!';
             }
             if (value != 'mahasiswa' && value != 'dosen') {
-              return 'Role harus mahasiswa atau dosen!';
+              return 'Status harus mahasiswa atau dosen!';
             }
             return null;
           },
