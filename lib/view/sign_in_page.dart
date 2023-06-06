@@ -107,9 +107,11 @@ class _SignInPageState extends State<SignInPage> {
     final nimNip = additionalData['nim_nip'].toString();
     final role = additionalData['role'].toString();
 
-    debugPrint('Email: $email, Full Name: $fullName, NIM/NIP: $nimNip, Role: $role');
+    debugPrint(
+        'Email: $email, Full Name: $fullName, NIM/NIP: $nimNip, Role: $role');
     try {
-      var url = Uri.parse('https://simak-back-end.cyclic.app/api/users/' + 'register');
+      var url = Uri.parse(
+          'https://simak-back-end.cyclic.app/api/users/' + 'register');
       var requestBody = json.encode({
         "username": data.name,
         "password": data.password,
@@ -130,7 +132,8 @@ class _SignInPageState extends State<SignInPage> {
         print(jsonData);
         return null;
       } else {
-        debugPrint('POST request gagal dengan status code: ${response.statusCode}');
+        debugPrint(
+            'POST request gagal dengan status code: ${response.statusCode}');
         return 'Akun gagal ditambahkan';
       }
     } catch (e) {
@@ -166,8 +169,7 @@ class _SignInPageState extends State<SignInPage> {
       title: 'SIMAK UIN SUKA',
       logo: const AssetImage('assets/images/logo_uin.png'),
       messages: LoginMessages(
-          userHint: 'NIM / NIP',
-          signUpSuccess: 'Akun berhasil didaftarkan'),
+          userHint: 'NIM / NIP', signUpSuccess: 'Akun berhasil didaftarkan'),
       theme: LoginTheme(
         titleStyle: h1,
         headerMargin: defaultMargin,
@@ -182,6 +184,9 @@ class _SignInPageState extends State<SignInPage> {
           fieldValidator: (value) {
             if (value == null || value.isEmpty) {
               return 'Masukkan email Anda!';
+            }
+            if (!value.contains('@') || !value.endsWith('uin-suka.ac.id')) {
+              return 'Gunakan email UIN Sunan Kalijaga!';
             }
             return null;
           },
