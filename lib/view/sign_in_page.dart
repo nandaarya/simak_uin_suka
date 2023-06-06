@@ -125,8 +125,8 @@ class _SignInPageState extends State<SignInPage> {
             'Content-Type': 'application/json; charset=UTF-8',
           },
           body: requestBody);
+      var jsonData = json.decode(response.body);
       if (response.statusCode == 201) {
-        var jsonData = json.decode(response.body);
         // Proses response atau lakukan operasi lain setelah POST berhasil;
         debugPrint('Akun berhasil ditambahkan');
         print(jsonData);
@@ -134,7 +134,7 @@ class _SignInPageState extends State<SignInPage> {
       } else {
         debugPrint(
             'POST request gagal dengan status code: ${response.statusCode}');
-        return 'Akun gagal ditambahkan';
+        return jsonData['message'];
       }
     } catch (e) {
       print('Something went wrong while adding user');
