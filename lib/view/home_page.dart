@@ -169,11 +169,11 @@ class _HomePageState extends State<HomePage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        name ?? 'Nama Tidak Tersedia',
+                        name ?? 'Nama tidak ada',
                         style: h3,
                       ),
                       Text(
-                        nim_nip ?? 'NIM/NIP Tidak Tersedia',
+                        nim_nip ?? 'NIM/NIP tidak ada',
                         style: h3,
                       )
                     ],

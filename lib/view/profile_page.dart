@@ -12,6 +12,27 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  String? name;
+  // ignore: non_constant_identifier_names
+  String? nim_nip;
+  String? role;
+
+  @override
+  void initState() {
+    getLocalData();
+    super.initState();
+  }
+
+  Future<void> getLocalData() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      name = prefs.getString('name');
+      nim_nip = prefs.getString('nim_nip');
+      role = prefs.getString('role');
+    });
+  }
+
   Future<void> removeLocalData() async {
     WidgetsFlutterBinding.ensureInitialized();
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -58,15 +79,15 @@ class _ProfilePageState extends State<ProfilePage> {
               size: 100,
             ),
             Text(
-              'Nanda Arya Putra',
+              name ?? 'Nama tidak ada',
               style: h2,
             ),
             Text(
-              '21106050048',
+              nim_nip ?? 'NIM / NIP tidak ada',
               style: h2,
             ),
             Text(
-              'User Mahasiswa',
+              role?.toUpperCase() ?? 'role tidak ada',
               style: h2,
             )
           ],
