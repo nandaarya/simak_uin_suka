@@ -133,7 +133,7 @@ class _SignInPageState extends State<SignInPage> {
       logo: const AssetImage('assets/images/logo_uin.png'),
       messages: LoginMessages(
           userHint: 'NIM / NIP',
-          ),
+          signUpSuccess: 'Akun berhasil didaftarkan'),
       theme: LoginTheme(
         titleStyle: h1,
         headerMargin: defaultMargin,
