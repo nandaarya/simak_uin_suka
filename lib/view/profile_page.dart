@@ -46,12 +46,14 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    final safePadding = MediaQuery.of(context).padding.top;
+
     Widget header() {
       return Container(
         alignment: AlignmentDirectional.centerStart,
-        height: 100,
+        height: 100 + safePadding,
         width: double.infinity,
-        padding: EdgeInsets.symmetric(horizontal: defaultMargin),
+        padding: EdgeInsets.only(top: safePadding, left: defaultMargin, right: defaultMargin),
         decoration: BoxDecoration(
             color: primaryColor,
             borderRadius: const BorderRadius.only(
@@ -231,6 +233,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
     return Scaffold(
       body: ListView(
+        padding: EdgeInsets.zero,
         // physics: NeverScrollableScrollPhysics(),
         children: [
           header(),

@@ -118,13 +118,14 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     double widthDevice = MediaQuery.of(context).size.width;
     double heightDevice = MediaQuery.of(context).size.height - 50;
+    final safePadding = MediaQuery.of(context).padding.top;
 
     Widget header() {
       return Container(
         alignment: AlignmentDirectional.centerStart,
-        height: 100,
+        height: 100 + safePadding,
         width: double.infinity,
-        padding: EdgeInsets.symmetric(horizontal: defaultMargin),
+        padding: EdgeInsets.only(top: safePadding, left: defaultMargin, right: defaultMargin),
         decoration: BoxDecoration(
             color: primaryColor,
             borderRadius: const BorderRadius.only(
@@ -364,6 +365,7 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       body: ListView(
+        padding: EdgeInsets.zero,
         physics: const NeverScrollableScrollPhysics(),
         children: [
           header(),
