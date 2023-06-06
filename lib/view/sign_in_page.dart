@@ -99,7 +99,8 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   Future<String?> _signupUser(SignupData data) {
-    debugPrint('Signup Name: ${data.name}, Password: ${data.password}');
+    debugPrint(
+        'Signup Name: ${data.name}, Password: ${data.password}, Email: ${data.additionalSignupData}');
     return Future.delayed(loginTime).then((_) {
       return null;
     });
@@ -125,30 +126,43 @@ class _SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
     return FlutterLogin(
-      // loginAfterSignUp: true,
+      loginAfterSignUp: false,
       userType: LoginUserType.name,
       userValidator: _usernameValidator,
       title: 'SIMAK UIN SUKA',
       logo: const AssetImage('assets/images/logo_uin.png'),
-      messages: LoginMessages(userHint: 'NIM / NIP'),
+      messages: LoginMessages(
+          userHint: 'NIM / NIP',
+          ),
       theme: LoginTheme(
         titleStyle: h1,
         headerMargin: defaultMargin,
         authButtonPadding: EdgeInsets.all(2 * defaultPadding),
       ),
       hideForgotPasswordButton: true,
-      onLogin: _authUser,
       additionalSignupFields: const [
         UserFormField(
           keyName: 'email',
-          displayName: 'Nama',
-          userType: LoginUserType.name,
+          displayName: 'Email',
           icon: Icon(FontAwesomeIcons.envelope),
         ),
-        UserFormField(keyName: 'name'),
-        UserFormField(keyName: 'nim_nip'),
-        UserFormField(keyName: 'role'),
+        UserFormField(
+          keyName: 'fullName',
+          displayName: 'Nama',
+          icon: Icon(FontAwesomeIcons.user),
+        ),
+        UserFormField(
+          keyName: 'nim_nip',
+          displayName: 'NIM / NIP',
+          icon: Icon(FontAwesomeIcons.idCard),
+        ),
+        UserFormField(
+          keyName: 'role',
+          displayName: 'Role',
+          icon: Icon(FontAwesomeIcons.users),
+        ),
       ],
+      onLogin: _authUser,
       onSignup: _signupUser,
       //
       // loginProviders: <LoginProvider>[
@@ -160,6 +174,10 @@ class _SignInPageState extends State<SignInPage> {
       //       await Future.delayed(loginTime);
       //       debugPrint('stop google sign in');
       //       return null;
+      //     },
+      //     providerNeedsSignUpCallback: () {
+      //       // put here your logic to conditionally show the additional fields
+      //       return Future.value(true);
       //     },
       //   ),
       // ],
