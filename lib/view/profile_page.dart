@@ -87,7 +87,7 @@ class _ProfilePageState extends State<ProfilePage> {
               style: h2,
             ),
             Text(
-              role?.toUpperCase() ?? 'role tidak ada',
+              role == 'mahasiswa' ? 'User Mahasiswa' : 'User Dosen',
               style: h2,
             )
           ],
@@ -185,7 +185,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   dialogType: DialogType.infoReverse,
                   borderSide: const BorderSide(color: Colors.green, width: 2),
                   width: double.infinity * 0.9,
-                  buttonsBorderRadius: const BorderRadius.all(Radius.circular(2)),
+                  buttonsBorderRadius:
+                      const BorderRadius.all(Radius.circular(2)),
                   headerAnimationLoop: false,
                   animType: AnimType.bottomSlide,
                   title: 'INFO',
@@ -193,8 +194,10 @@ class _ProfilePageState extends State<ProfilePage> {
                   showCloseIcon: true,
                   btnCancelOnPress: () {},
                   btnOkOnPress: () {
-                    removeLocalData().whenComplete(() => Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => const SignInPage())));
+                    removeLocalData().whenComplete(() => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SignInPage())));
                   },
                 ).show();
               },
