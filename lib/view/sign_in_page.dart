@@ -124,7 +124,7 @@ class _SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
     return FlutterLogin(
-      loginAfterSignUp: true,
+      // loginAfterSignUp: true,
       userType: LoginUserType.name,
       userValidator: _usernameValidator,
       title: 'SIMAK UIN SUKA',
