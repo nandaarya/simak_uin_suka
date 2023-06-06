@@ -12,10 +12,38 @@ const users = {
   '21106050048': '21106050048'
 };
 
-class SignInPage extends StatelessWidget {
+class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
 
+  @override
+  State<SignInPage> createState() => _SignInPageState();
+}
+
+class _SignInPageState extends State<SignInPage> {
+  @override
+  void initState() {
+    checkIfAlreadyLogin();
+    super.initState();
+  }
+
   Duration get loginTime => const Duration(milliseconds: 2250);
+
+  void checkIfAlreadyLogin() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (mounted) {
+      if (prefs.getString('username') != null &&
+          prefs.getString('password') != null &&
+          prefs.getString('email') != null &&
+          prefs.getString('name') != null &&
+          prefs.getString('nim_nip') != null &&
+          prefs.getString('role') != null) {
+        // Semua nilai prefs.getString() tidak null dan sudah memiliki nilai
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => const MainPage()),
+        );
+      }
+    }
+  }
 
   Future<String?> _authUser(LoginData data) async {
     debugPrint('Name: ${data.name}, Password: ${data.password}');
@@ -58,7 +86,8 @@ class SignInPage extends StatelessWidget {
         print(jsonData);
         return null;
       } else {
-        debugPrint('POST request gagal dengan status code: ${response.statusCode}');
+        debugPrint(
+            'POST request gagal dengan status code: ${response.statusCode}');
         return jsonData['message'];
       }
     } catch (e) {
