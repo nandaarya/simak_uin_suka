@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simak_uin_suka/theme.dart';
 import 'package:simak_uin_suka/view/change_data_page.dart';
+import 'package:simak_uin_suka/view/change_password_page.dart';
 import 'package:simak_uin_suka/view/sign_in_page.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -163,7 +164,12 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ChangePasswordPage()));
+              },
               child: Column(
                 children: [
                   Row(
