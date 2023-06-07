@@ -284,11 +284,10 @@ class _ChangeDataPageState extends State<ChangeDataPage> {
                         await changeUserData()
                             .then((value) => flushBar(context, value));
                         if (!mounted) return;
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const ProfilePage()),
-                        );
+                        Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(
+                                builder: (context) => const ProfilePage()),
+                            (Route<dynamic> route) => false);
                       }
                     },
                     child: const Text('Simpan Data')))
