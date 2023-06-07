@@ -287,7 +287,7 @@ class _ChangeDataPageState extends State<ChangeDataPage> {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ProfilePage()),
+                              builder: (context) => const ProfilePage()),
                         );
                       }
                     },
