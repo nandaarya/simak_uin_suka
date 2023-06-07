@@ -281,14 +281,19 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                 margin: EdgeInsets.all(defaultMargin),
                 child: ElevatedButton(
                     onPressed: () async {
-                      await changePassword().then((value) => flushBar(context, value));
-                      if (!mounted) return;
-                      removeLocalData().whenComplete(
-                        () => Navigator.of(context).pushAndRemoveUntil(
-                            MaterialPageRoute(
-                                builder: (context) => const SignInPage()),
-                            (Route<dynamic> route) => false),
-                      );
+                      await changePassword().then((value) {
+                        if (value == 'Password berhasil diubah') {
+                          flushBar(context, value);
+                          return removeLocalData().whenComplete(
+                            () => Navigator.of(context).pushAndRemoveUntil(
+                                MaterialPageRoute(
+                                    builder: (context) => const SignInPage()),
+                                (Route<dynamic> route) => false),
+                          );
+                        } else {
+                          return flushBar(context, value);
+                        }
+                      });
                     },
                     child: const Text('Ubah Password')))
           ],
