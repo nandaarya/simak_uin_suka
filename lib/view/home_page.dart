@@ -102,12 +102,12 @@ class _HomePageState extends State<HomePage> {
           });
         }
       }
-      for (var presensi in presensiList) {
-        print('nim: ${presensi.nim}');
-        print('classCode: ${presensi.classCode}');
-        print('status: ${presensi.status}');
-        print('--------------');
-      }
+      // for (var presensi in presensiList) {
+      //   print('nim: ${presensi.nim}');
+      //   print('classCode: ${presensi.classCode}');
+      //   print('status: ${presensi.status}');
+      //   print('--------------');
+      // }
     } catch (e) {
       print("Something went wrong while getting presensi");
       print(e);
