@@ -3,7 +3,7 @@ import 'package:another_flushbar/flushbar.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:simak_uin_suka/view/profile_page.dart';
+import 'package:simak_uin_suka/view/main_page.dart';
 
 import '../theme.dart';
 
@@ -286,7 +286,7 @@ class _ChangeDataPageState extends State<ChangeDataPage> {
                         if (!mounted) return;
                         Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(
-                                builder: (context) => const ProfilePage()),
+                                builder: (context) => const MainPage()),
                             (Route<dynamic> route) => false);
                       }
                     },
