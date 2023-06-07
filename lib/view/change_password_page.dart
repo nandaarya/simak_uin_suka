@@ -1,4 +1,9 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:simak_uin_suka/view/sign_in_page.dart';
 
 import '../theme.dart';
 
@@ -10,10 +15,70 @@ class ChangePasswordPage extends StatefulWidget {
 }
 
 class _ChangePasswordPageState extends State<ChangePasswordPage> {
-  TextEditingController? usernameController;
-  TextEditingController? oldPasswordController;
-  TextEditingController? newPasswordController;
-  TextEditingController? confirmNewPasswordController;
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController oldPasswordController = TextEditingController();
+  TextEditingController newPasswordController = TextEditingController();
+  TextEditingController confirmNewPasswordController = TextEditingController();
+
+  String? username;
+
+  Future<void> flushBar(BuildContext context, message) async {
+    // debugPrint(message);
+    if (message != null) {
+      await Flushbar(
+        message: message,
+        duration: const Duration(seconds: 2),
+        flushbarPosition: FlushbarPosition.BOTTOM,
+        backgroundColor: message == 'Password berhasil diubah'
+            ? Colors.lightGreen
+            : Colors.red,
+      ).show(context);
+    }
+  }
+
+  Future<void> removeLocalData() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove('username');
+    await prefs.remove('password');
+    await prefs.remove('email');
+    await prefs.remove('name');
+    await prefs.remove('nim_nip');
+    await prefs.remove('role');
+  }
+
+  Future<String?> changePassword() async {
+    setState(() {
+      username = usernameController.text;
+    });
+    try {
+      var url = Uri.parse(
+          'https://simak-back-end.cyclic.app/api/users/updatePassword/$username');
+      var requestBody = json.encode({
+        "oldPassword": oldPasswordController.text,
+        "newPassword": newPasswordController.text,
+        "confirmNewPassword": confirmNewPasswordController.text,
+      });
+      var response = await http.put(url,
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          body: requestBody);
+      var jsonData = json.decode(response.body);
+      if (response.statusCode == 200) {
+        debugPrint('Berhasil mengubah password!');
+        return jsonData['message'];
+      } else {
+        debugPrint(
+            'PUT request gagal dengan status code: ${response.statusCode}');
+        return jsonData['message'];
+      }
+    } catch (e) {
+      print('Something went wrong while change password');
+      print(e);
+    }
+    return null;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -206,7 +271,17 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
             Container(
                 margin: EdgeInsets.all(defaultMargin),
                 child: ElevatedButton(
-                    onPressed: () {}, child: const Text('Ubah Password')))
+                    onPressed: () async {
+                      await changePassword().then((value) => flushBar(context, value));
+                      if (!mounted) return;
+                      removeLocalData().whenComplete(
+                        () => Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(
+                                builder: (context) => const SignInPage()),
+                            (Route<dynamic> route) => false),
+                      );
+                    },
+                    child: const Text('Ubah Password')))
           ],
         ),
       ),
