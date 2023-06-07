@@ -10,6 +10,11 @@ class ChangePasswordPage extends StatefulWidget {
 }
 
 class _ChangePasswordPageState extends State<ChangePasswordPage> {
+  TextEditingController? usernameController;
+  TextEditingController? oldPasswordController;
+  TextEditingController? newPasswordController;
+  TextEditingController? confirmNewPasswordController;
+
   @override
   Widget build(BuildContext context) {
     double widthDevice = MediaQuery.of(context).size.width;
@@ -55,6 +60,126 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
       );
     }
 
+    Widget usernameTextField() {
+      return Container(
+        margin: EdgeInsets.symmetric(horizontal: defaultMargin),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(
+              height: 24,
+            ),
+            Text('Username', style: h2),
+            Container(
+              margin: const EdgeInsets.only(top: 6),
+              height: 45,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: Colors.black)),
+              child: TextField(
+                controller: usernameController,
+                decoration: const InputDecoration(
+                    border: InputBorder.none,
+                    contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                    hintText: 'Masukkan Username'),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    Widget oldPasswordTextField() {
+      return Container(
+        margin: EdgeInsets.symmetric(horizontal: defaultMargin),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(
+              height: 24,
+            ),
+            Text('Password Lama', style: h2),
+            Container(
+              margin: const EdgeInsets.only(top: 6),
+              height: 45,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: Colors.black)),
+              child: TextField(
+                controller: oldPasswordController,
+                decoration: const InputDecoration(
+                    border: InputBorder.none,
+                    contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                    hintText: 'Masukkan Password Lama'),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    Widget newPasswordTextField() {
+      return Container(
+        margin: EdgeInsets.symmetric(horizontal: defaultMargin),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(
+              height: 24,
+            ),
+            Text('Password Baru', style: h2),
+            Container(
+              margin: const EdgeInsets.only(top: 6),
+              height: 45,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: Colors.black)),
+              child: TextField(
+                controller: newPasswordController,
+                decoration: const InputDecoration(
+                    border: InputBorder.none,
+                    contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                    hintText: 'Masukkan Password Baru'),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    Widget confirmNewPasswordTextField() {
+      return Container(
+        margin: EdgeInsets.symmetric(horizontal: defaultMargin),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(
+              height: 24,
+            ),
+            Text('Masukkan Ulang Password Baru', style: h2),
+            Container(
+              margin: const EdgeInsets.only(top: 6),
+              height: 45,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: Colors.black)),
+              child: TextField(
+                controller: confirmNewPasswordController,
+                decoration: const InputDecoration(
+                    border: InputBorder.none,
+                    contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                    hintText: 'Masukkan Ulang Password Baru'),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
     return Scaffold(
       body: SizedBox(
         height: heightDevice,
@@ -69,11 +194,15 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                 margin: EdgeInsets.symmetric(horizontal: defaultMargin),
                 padding: EdgeInsets.only(top: defaultPadding),
                 child: Text(
-                  '',
+                  'Masukkan Informasi Login',
                   style: h1,
                 ),
               ),
             ),
+            usernameTextField(),
+            oldPasswordTextField(),
+            newPasswordTextField(),
+            confirmNewPasswordTextField(),
             Container(
                 margin: EdgeInsets.all(defaultMargin),
                 child: ElevatedButton(
