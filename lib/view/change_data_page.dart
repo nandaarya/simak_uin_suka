@@ -34,6 +34,14 @@ class _ChangeDataPageState extends State<ChangeDataPage> {
     getLocalData();
   }
 
+  @override
+  void dispose() {
+    nameController.dispose();
+    emailController.dispose();
+    nimnipController.dispose();
+    super.dispose();
+  }
+
   Future<void> flushBar(BuildContext context, message) async {
     // debugPrint(message);
     if (message != null) {
