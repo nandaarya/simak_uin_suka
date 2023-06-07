@@ -28,9 +28,28 @@ class _ChangeDataPageState extends State<ChangeDataPage> {
               bottomLeft: Radius.circular(12),
               bottomRight: Radius.circular(12),
             )),
-        child: Text(
-          'Ubah Data',
-          style: h1,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            InkWell(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Icon(Icons.arrow_back_ios_new),
+              ),
+            ),
+            Text(
+              'Ubah Data',
+              style: h1,
+            ),
+          ],
         ),
       );
     }
