@@ -2,6 +2,7 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simak_uin_suka/theme.dart';
+import 'package:simak_uin_suka/view/change_data_page.dart';
 import 'package:simak_uin_suka/view/sign_in_page.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -53,7 +54,8 @@ class _ProfilePageState extends State<ProfilePage> {
         alignment: AlignmentDirectional.centerStart,
         height: 100 + safePadding,
         width: double.infinity,
-        padding: EdgeInsets.only(top: safePadding, left: defaultMargin, right: defaultMargin),
+        padding: EdgeInsets.only(
+            top: safePadding, left: defaultMargin, right: defaultMargin),
         decoration: BoxDecoration(
             color: primaryColor,
             borderRadius: const BorderRadius.only(
@@ -131,7 +133,12 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ChangeDataPage()));
+              },
               child: Column(
                 children: [
                   Row(
