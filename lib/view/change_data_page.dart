@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'package:another_flushbar/flushbar.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -15,11 +18,14 @@ class _ChangeDataPageState extends State<ChangeDataPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController nimnipController = TextEditingController();
 
+  String? username;
   String? name;
   String? email;
   // ignore: non_constant_identifier_names
   String? nim_nip;
   String? role;
+
+  final emailKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -27,10 +33,25 @@ class _ChangeDataPageState extends State<ChangeDataPage> {
     getLocalData();
   }
 
+  void flushBar(BuildContext context, message) {
+    // debugPrint(message);
+    if (message != null) {
+      Flushbar(
+        message: message,
+        duration: const Duration(seconds: 2),
+        flushbarPosition: FlushbarPosition.BOTTOM,
+        backgroundColor: message == 'Data user berhasil diubah'
+            ? Colors.lightGreen
+            : Colors.red,
+      ).show(context);
+    }
+  }
+
   Future<void> getLocalData() async {
     WidgetsFlutterBinding.ensureInitialized();
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
+      username = prefs.getString('username');
       name = prefs.getString('name');
       email = prefs.getString('email');
       nim_nip = prefs.getString('nim_nip');
@@ -39,6 +60,48 @@ class _ChangeDataPageState extends State<ChangeDataPage> {
       emailController = TextEditingController(text: email);
       nimnipController = TextEditingController(text: nim_nip);
     });
+  }
+
+  Future<String?> changeUserData() async {
+    try {
+      var url = Uri.parse(
+          'https://simak-back-end.cyclic.app/api/users/$username');
+      var requestBody = json.encode({
+        "name": nameController.text,
+        "email": emailController.text,
+        "nim_nip": nimnipController.text,
+      });
+      var response = await http.put(url,
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          body: requestBody);
+      var jsonData = json.decode(response.body);
+      if (response.statusCode == 200) {
+        try {
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          prefs.setString('email', emailController.text);
+          prefs.setString('name', nameController.text);
+          prefs.setString('nim_nip', nimnipController.text);
+
+          debugPrint("Data email lokal: ${prefs.getString('email')}");
+          debugPrint("Data nama lokal: ${prefs.getString('name')}");
+          debugPrint("Data nim_nip lokal: ${prefs.getString('nim_nip')}");
+        } catch (e) {
+          debugPrint('Error accessing SharedPreferences: $e');
+        }
+        debugPrint('Berhasil mengubah data User!');
+        return jsonData['message'];
+      } else {
+        debugPrint(
+            'PUT request gagal dengan status code: ${response.statusCode}');
+        return jsonData['message'];
+      }
+    } catch (e) {
+      print('Something went wrong while change user data');
+      print(e);
+    }
+    return null;
   }
 
   @override
@@ -133,12 +196,25 @@ class _ChangeDataPageState extends State<ChangeDataPage> {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(color: Colors.black)),
-              child: TextField(
-                controller: emailController,
-                decoration: const InputDecoration(
-                    border: InputBorder.none,
-                    contentPadding: EdgeInsets.symmetric(horizontal: 10),
-                    hintText: 'Email Mahasiswa/Dosen'),
+              child: Form(
+                key: emailKey,
+                child: TextFormField(
+                  controller: emailController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Masukkan email Anda!';
+                    }
+                    if (!value.contains('@') ||
+                        !value.endsWith('uin-suka.ac.id')) {
+                      return 'Gunakan email UIN Sunan Kalijaga!';
+                    }
+                    return null;
+                  },
+                  decoration: const InputDecoration(
+                      border: InputBorder.none,
+                      contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                      hintText: 'Email Mahasiswa/Dosen'),
+                ),
               ),
             ),
           ],
@@ -202,7 +278,13 @@ class _ChangeDataPageState extends State<ChangeDataPage> {
             Container(
                 margin: EdgeInsets.all(defaultMargin),
                 child: ElevatedButton(
-                    onPressed: () {}, child: const Text('Simpan Data')))
+                    onPressed: () {
+                      if (emailKey.currentState!.validate()) {
+                        changeUserData()
+                            .then((value) => flushBar(context, value));
+                      }
+                    },
+                    child: const Text('Simpan Data')))
           ],
         ),
       ),
