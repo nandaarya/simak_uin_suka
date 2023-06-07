@@ -37,7 +37,6 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     getLocalData();
     getJadwal();
-    getPresensi();
   }
 
   Future<void> getLocalData() async {
@@ -47,6 +46,7 @@ class _HomePageState extends State<HomePage> {
       name = prefs.getString('name');
       nim_nip = prefs.getString('nim_nip');
     });
+    getPresensi(); // wait for nim_nip value
   }
 
   Future<void> getJadwal() async {
@@ -88,7 +88,7 @@ class _HomePageState extends State<HomePage> {
   Future<void> getPresensi() async {
     try {
       var response = await http.get(
-          Uri.parse('https://simak-back-end.cyclic.app/api/' + 'presensi'));
+          Uri.parse('https://simak-back-end.cyclic.app/api/presensi?nim=${nim_nip}'));
       if (response.statusCode == 200) {
         var jsonData = json.decode(response.body);
         if (jsonData["data"]["attendances"] != null) {
@@ -102,12 +102,12 @@ class _HomePageState extends State<HomePage> {
           });
         }
       }
-      // for (var presensi in presensiList) {
-      //   print('nim: ${presensi.nim}');
-      //   print('classCode: ${presensi.classCode}');
-      //   print('status: ${presensi.status}');
-      //   print('--------------');
-      // }
+      for (var presensi in presensiList) {
+        print('nim: ${presensi.nim}');
+        print('classCode: ${presensi.classCode}');
+        print('status: ${presensi.status}');
+        print('--------------');
+      }
     } catch (e) {
       print("Something went wrong while getting presensi");
       print(e);
