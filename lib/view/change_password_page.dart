@@ -22,6 +22,15 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
 
   String? username;
 
+  @override
+  void dispose() {
+    usernameController.dispose();
+    oldPasswordController.dispose();
+    newPasswordController.dispose();
+    confirmNewPasswordController.dispose();
+    super.dispose();
+  }
+
   Future<void> flushBar(BuildContext context, message) async {
     // debugPrint(message);
     if (message != null) {
