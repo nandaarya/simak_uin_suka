@@ -260,7 +260,6 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
         width: widthDevice,
         child: ListView(
           padding: EdgeInsets.zero,
-          physics: const NeverScrollableScrollPhysics(),
           children: [
             header(),
             Center(
