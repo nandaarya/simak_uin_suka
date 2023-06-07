@@ -3,6 +3,7 @@ import 'package:another_flushbar/flushbar.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:simak_uin_suka/view/profile_page.dart';
 
 import '../theme.dart';
 
@@ -33,10 +34,10 @@ class _ChangeDataPageState extends State<ChangeDataPage> {
     getLocalData();
   }
 
-  void flushBar(BuildContext context, message) {
+  Future<void> flushBar(BuildContext context, message) async {
     // debugPrint(message);
     if (message != null) {
-      Flushbar(
+      await Flushbar(
         message: message,
         duration: const Duration(seconds: 2),
         flushbarPosition: FlushbarPosition.BOTTOM,
@@ -64,8 +65,8 @@ class _ChangeDataPageState extends State<ChangeDataPage> {
 
   Future<String?> changeUserData() async {
     try {
-      var url = Uri.parse(
-          'https://simak-back-end.cyclic.app/api/users/$username');
+      var url =
+          Uri.parse('https://simak-back-end.cyclic.app/api/users/$username');
       var requestBody = json.encode({
         "name": nameController.text,
         "email": emailController.text,
@@ -278,10 +279,16 @@ class _ChangeDataPageState extends State<ChangeDataPage> {
             Container(
                 margin: EdgeInsets.all(defaultMargin),
                 child: ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (emailKey.currentState!.validate()) {
-                        changeUserData()
+                        await changeUserData()
                             .then((value) => flushBar(context, value));
+                        if (!mounted) return;
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ProfilePage()),
+                        );
                       }
                     },
                     child: const Text('Simpan Data')))
