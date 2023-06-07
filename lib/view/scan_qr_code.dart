@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simak_uin_suka/model/presensiModel.dart';
 import 'package:http/http.dart' as http;
 import 'package:simak_uin_suka/view/main_page.dart';
@@ -19,6 +20,20 @@ class _QRScannerState extends State<QRScanner> {
   Barcode? result;
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
+  // ignore: non_constant_identifier_names
+  String? nim_nip;
+
+  @override
+  void initState() {
+    getLocalData();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller?.dispose();
+    super.dispose();
+  }
 
   // In order to get hot reload to work we need to pause the camera if the platform
   // is android, or resume the camera if the platform is iOS.
@@ -31,6 +46,14 @@ class _QRScannerState extends State<QRScanner> {
     controller!.resumeCamera();
   }
 
+  Future<void> getLocalData() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      nim_nip = prefs.getString('nim_nip');
+    });
+  }
+
   Future<String?> postPresensi(PresensiModel presensi) async {
     try {
       var url =
@@ -41,18 +64,19 @@ class _QRScannerState extends State<QRScanner> {
             'Content-Type': 'application/json; charset=UTF-8',
           },
           body: requestBody);
+      var jsonData = json.decode(response.body);
+      var message = jsonData['message'];
       if (response.statusCode == 201) {
-        var jsonData = json.decode(response.body);
         // Proses response atau lakukan operasi lain setelah POST berhasil
-        var message = jsonData['message'];
-        print('Presensi berhasil dipost');
-        print(jsonData);
+        debugPrint('Presensi berhasil dipost');
         return message;
       } else {
-        print('POST request gagal dengan status code: ${response.statusCode}');
+        debugPrint('POST request gagal dengan status code: ${response.statusCode}');
+        debugPrint(jsonData['message']);
+        return message;
       }
     } catch (e) {
-      print('Something went wrong while posting presensi');
+      debugPrint('Something went wrong while posting presensi');
       print(e);
     }
     return null;
@@ -181,15 +205,14 @@ class _QRScannerState extends State<QRScanner> {
         result = scanData;
       });
       if (result?.code != null) {
-        this.controller?.stopCamera();
-        this.controller?.dispose();
+        controller.pauseCamera();
         PresensiModel presensi = PresensiModel(
-            nim: '21106050048', classCode: result!.code!, status: 'Hadir');
+            nim: nim_nip!, classCode: result!.code!, status: 'Hadir');
         postPresensi(presensi).then((value) {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: ((context) => const MainPage()),
+              builder: ((context) => MainPage(message: value)),
             ),
           );
         });
@@ -204,12 +227,5 @@ class _QRScannerState extends State<QRScanner> {
         const SnackBar(content: Text('no Permission')),
       );
     }
-  }
-
-  @override
-  void dispose() {
-    controller?.stopCamera();
-    controller?.dispose();
-    super.dispose();
   }
 }

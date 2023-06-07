@@ -1,3 +1,4 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/services.dart';
@@ -10,7 +11,8 @@ import 'package:simak_uin_suka/theme.dart';
 import 'package:page_transition/page_transition.dart';
 
 class MainPage extends StatefulWidget {
-  const MainPage({super.key});
+  final String? message;
+  const MainPage({Key? key, this.message}) : super(key: key);
 
   @override
   State<MainPage> createState() => _MainPageState();
@@ -24,6 +26,21 @@ class _MainPageState extends State<MainPage> {
   void initState() {
     getLocalData();
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      flushBar(context, widget.message);
+    });
+  }
+
+  void flushBar(BuildContext context, message) {
+    // debugPrint(message);
+    if (message != null) {
+      Flushbar(
+        message: message,
+        duration: const Duration(seconds: 2),
+        flushbarPosition: FlushbarPosition.BOTTOM,
+        backgroundColor: message == 'Presensi Berhasil' ? Colors.lightGreen : Colors.red,
+      ).show(context);
+    }
   }
 
   Future<void> getLocalData() async {
