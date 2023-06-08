@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -7,7 +6,6 @@ import 'package:simak_uin_suka/theme.dart';
 import 'package:simak_uin_suka/view/detail_jadwal_page.dart';
 import '../model/jadwalModel.dart';
 import 'package:http/http.dart' as http;
-
 import '../model/presensiModel.dart';
 
 class HomePage extends StatefulWidget {

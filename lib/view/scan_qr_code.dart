@@ -57,7 +57,7 @@ class _QRScannerState extends State<QRScanner> {
   Future<String?> postPresensi(PresensiModel presensi) async {
     try {
       var url =
-          Uri.parse('https://simak-back-end.cyclic.app/api/' + 'presensi');
+          Uri.parse('https://simak-back-end.cyclic.app/api/' 'presensi');
       var requestBody = presensiModelToJson(presensi);
       var response = await http.post(url,
           headers: <String, String>{
