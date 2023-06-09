@@ -7,8 +7,6 @@ import 'package:simak_uin_suka/view/splash_page.dart';
 
 
 void main() async {
-  // WidgetsFlutterBinding.ensureInitialized();
-  // await EasyLocalization.ensureInitialized();
   await initializeDateFormatting('id_ID', null).then((_) => runApp(const MyApp()));
 }
 
@@ -32,8 +30,6 @@ class MyApp extends StatelessWidget {
           '/': (context) => const SplashPage(),
         //   '/signIn_page': (context) => SignInPage(),
           '/main_page': (context) => const MainPage(),
-        //   '/nasabah_search_page': (context) => CustomerSearchPage(),
-        //   '/news_search_page': (context) => NewsSearchPage(),
         }
         );
   }
