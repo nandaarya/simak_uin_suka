@@ -45,7 +45,7 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
 
   Future<String?> postJadwal(JadwalModel jadwal) async {
     try {
-      var url = Uri.parse('https://simak-back-end.cyclic.app/api/' + 'jadwal');
+      var url = Uri.parse('https://simak-back-end.cyclic.app/api/' 'jadwal');
       var requestBody = jadwalModelToJson(jadwal);
       var response = await http.post(url,
           headers: <String, String>{
@@ -56,14 +56,14 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
         var jsonData = json.decode(response.body);
         // Proses response atau lakukan operasi lain setelah POST berhasil
         var classCode = jsonData['data']['classCode'];
-        print('Jadwal berhasil dipost');
+        debugPrint('Jadwal berhasil dipost');
         print(jsonData);
         return classCode;
       } else {
-        print('POST request gagal dengan status code: ${response.statusCode}');
+        debugPrint('POST request gagal dengan status code: ${response.statusCode}');
       }
     } catch (e) {
-      print('Something went wrong while posting jadwal');
+      debugPrint('Something went wrong while posting jadwal');
       print(e);
     }
     return null;
@@ -107,7 +107,7 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
                   // This is called when the user selects an item.
                   setState(() {
                     dropdownClassValue = value!;
-                    print(dropdownClassValue);
+                    // print(dropdownClassValue);
                   });
                 },
               ),
