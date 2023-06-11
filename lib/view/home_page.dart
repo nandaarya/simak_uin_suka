@@ -85,8 +85,8 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> getPresensi() async {
     try {
-      var response = await http.get(
-          Uri.parse('https://simak-back-end.cyclic.app/api/presensi?nim=${nim_nip}'));
+      var response = await http.get(Uri.parse(
+          'https://simak-back-end.cyclic.app/api/presensi?nim=${nim_nip}'));
       if (response.statusCode == 200) {
         var jsonData = json.decode(response.body);
         if (jsonData["data"]["attendances"] != null) {
@@ -123,7 +123,8 @@ class _HomePageState extends State<HomePage> {
         alignment: AlignmentDirectional.centerStart,
         height: 100 + safePadding,
         width: double.infinity,
-        padding: EdgeInsets.only(top: safePadding, left: defaultMargin, right: defaultMargin),
+        padding: EdgeInsets.only(
+            top: safePadding, left: defaultMargin, right: defaultMargin),
         decoration: BoxDecoration(
             color: primaryColor,
             borderRadius: const BorderRadius.only(
@@ -252,7 +253,8 @@ class _HomePageState extends State<HomePage> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         'Dosen',
@@ -315,7 +317,8 @@ class _HomePageState extends State<HomePage> {
                                     width: 8,
                                   ),
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         jadwalList[index].lecturer,

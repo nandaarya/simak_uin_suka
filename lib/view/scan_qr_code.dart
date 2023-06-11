@@ -56,8 +56,7 @@ class _QRScannerState extends State<QRScanner> {
 
   Future<String?> postPresensi(PresensiModel presensi) async {
     try {
-      var url =
-          Uri.parse('https://simak-back-end.cyclic.app/api/' 'presensi');
+      var url = Uri.parse('https://simak-back-end.cyclic.app/api/' 'presensi');
       var requestBody = presensiModelToJson(presensi);
       var response = await http.post(url,
           headers: <String, String>{
@@ -71,7 +70,8 @@ class _QRScannerState extends State<QRScanner> {
         debugPrint('Presensi berhasil dipost');
         return message;
       } else {
-        debugPrint('POST request gagal dengan status code: ${response.statusCode}');
+        debugPrint(
+            'POST request gagal dengan status code: ${response.statusCode}');
         debugPrint(jsonData['message']);
         return message;
       }

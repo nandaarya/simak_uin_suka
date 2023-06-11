@@ -33,8 +33,13 @@ class DetailJadwalPage extends StatelessWidget {
         margin: EdgeInsets.symmetric(vertical: defaultMargin),
         child: Column(
           children: [
-            Text('QR Presensi', style: h2,),
-            const SizedBox(height: 16,),
+            Text(
+              'QR Presensi',
+              style: h2,
+            ),
+            const SizedBox(
+              height: 16,
+            ),
             QrImage(
               data: classCode,
               version: 3,
@@ -44,7 +49,9 @@ class DetailJadwalPage extends StatelessWidget {
               //   size: Size(80, 80),
               // ),
             ),
-            const SizedBox(height: 16,),
+            const SizedBox(
+              height: 16,
+            ),
             Container(
               margin: EdgeInsets.symmetric(horizontal: defaultMargin),
               padding: EdgeInsets.symmetric(horizontal: defaultPadding),
@@ -144,7 +151,9 @@ class DetailJadwalPage extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 16,),
+            const SizedBox(
+              height: 16,
+            ),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(

@@ -38,7 +38,8 @@ class _MainPageState extends State<MainPage> {
         message: message,
         duration: const Duration(seconds: 2),
         flushbarPosition: FlushbarPosition.BOTTOM,
-        backgroundColor: message == 'Presensi Berhasil' ? Colors.lightGreen : Colors.red,
+        backgroundColor:
+            message == 'Presensi Berhasil' ? Colors.lightGreen : Colors.red,
       ).show(context);
     }
   }

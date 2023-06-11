@@ -60,7 +60,8 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
         print(jsonData);
         return classCode;
       } else {
-        debugPrint('POST request gagal dengan status code: ${response.statusCode}');
+        debugPrint(
+            'POST request gagal dengan status code: ${response.statusCode}');
       }
     } catch (e) {
       debugPrint('Something went wrong while posting jadwal');
@@ -226,8 +227,14 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
                         className: dropdownClassValue,
                         lecturer: 'Dosen',
                         material: materiController.text,
-                        startedAt: DateFormat("EEEE, d MMMM yyyy    HH:mm WIB", "id_ID").format(startTime).toString(),
-                        finishAt: DateFormat("EEEE, d MMMM yyyy    HH:mm WIB", "id_ID").format(endTime).toString(),
+                        startedAt: DateFormat(
+                                "EEEE, d MMMM yyyy    HH:mm WIB", "id_ID")
+                            .format(startTime)
+                            .toString(),
+                        finishAt: DateFormat(
+                                "EEEE, d MMMM yyyy    HH:mm WIB", "id_ID")
+                            .format(endTime)
+                            .toString(),
                         room: ruangController.text,
                       );
                       // value is classCode From Response POST
@@ -240,8 +247,16 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
                                 className: dropdownClassValue,
                                 lecturer: 'Dosen',
                                 material: materiController.text,
-                                startedAt: DateFormat("EEEE, d MMMM yyyy    HH:mm WIB", "id_ID").format(startTime).toString(),
-                                finishAt: DateFormat("EEEE, d MMMM yyyy    HH:mm WIB", "id_ID").format(endTime).toString(),
+                                startedAt: DateFormat(
+                                        "EEEE, d MMMM yyyy    HH:mm WIB",
+                                        "id_ID")
+                                    .format(startTime)
+                                    .toString(),
+                                finishAt: DateFormat(
+                                        "EEEE, d MMMM yyyy    HH:mm WIB",
+                                        "id_ID")
+                                    .format(endTime)
+                                    .toString(),
                                 room: ruangController.text)),
                           ),
                         );

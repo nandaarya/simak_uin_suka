@@ -11,7 +11,6 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-
   @override
   Widget build(BuildContext context) {
     return EasySplashScreen(
@@ -23,8 +22,10 @@ class _SplashPageState extends State<SplashPage> {
       ),
       backgroundColor: Colors.grey.shade400,
       showLoader: true,
-      loadingText: Text("Mengunduh Data...", style: h2,),
-      // futureNavigator: futureCall(),
+      loadingText: Text(
+        "Mengunduh Data...",
+        style: h2,
+      ),
       navigator: const SignInPage(),
     );
   }
