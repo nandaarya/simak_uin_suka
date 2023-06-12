@@ -44,10 +44,6 @@ class DetailJadwalPage extends StatelessWidget {
               data: classCode,
               version: 3,
               size: 300,
-              // embeddedImage: AssetImage('assets/images/logo_uin.png'),
-              // embeddedImageStyle: QrEmbeddedImageStyle(
-              //   size: Size(80, 80),
-              // ),
             ),
             const SizedBox(
               height: 16,

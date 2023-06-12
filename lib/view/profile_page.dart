@@ -108,31 +108,6 @@ class _ProfilePageState extends State<ProfilePage> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // InkWell(
-            //   onTap: () {},
-            //   child: Column(
-            //     children: [
-            //       Row(
-            //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //         crossAxisAlignment: CrossAxisAlignment.center,
-            //         children: [
-            //           Text(
-            //             'Ubah Bahasa',
-            //             style: h2,
-            //           ),
-            //           const Icon(Icons.arrow_forward_ios_rounded)
-            //         ],
-            //       ),
-            //       const SizedBox(
-            //         height: 8,
-            //       ),
-            //       Container(
-            //         height: 1,
-            //         color: primaryColor,
-            //       ),
-            //     ],
-            //   ),
-            // ),
             InkWell(
               onTap: () {
                 Navigator.push(
