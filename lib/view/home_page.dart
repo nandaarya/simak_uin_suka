@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> {
   Future<void> getJadwal() async {
     try {
       var response = await http
-          .get(Uri.parse('https://simak-back-end.cyclic.app/api/' + 'jadwal'));
+          .get(Uri.parse('https://simak-back-end.cyclic.app/api/' 'jadwal'));
       if (response.statusCode == 200) {
         var jsonData = json.decode(response.body);
         if (jsonData["data"]["classes"] != null) {
@@ -78,7 +78,7 @@ class _HomePageState extends State<HomePage> {
       //   print('--------------');
       // }
     } catch (e) {
-      print("Something went wrong while getting jadwal");
+      debugPrint("Something went wrong while getting jadwal");
       print(e);
     }
   }
@@ -86,7 +86,7 @@ class _HomePageState extends State<HomePage> {
   Future<void> getPresensi() async {
     try {
       var response = await http.get(Uri.parse(
-          'https://simak-back-end.cyclic.app/api/presensi?nim=${nim_nip}'));
+          'https://simak-back-end.cyclic.app/api/presensi?nim=$nim_nip'));
       if (response.statusCode == 200) {
         var jsonData = json.decode(response.body);
         if (jsonData["data"]["attendances"] != null) {
@@ -107,7 +107,7 @@ class _HomePageState extends State<HomePage> {
       //   print('--------------');
       // }
     } catch (e) {
-      print("Something went wrong while getting presensi");
+      debugPrint("Something went wrong while getting presensi");
       print(e);
     }
   }
