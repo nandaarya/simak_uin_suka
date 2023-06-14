@@ -79,7 +79,7 @@ class _HomePageState extends State<HomePage> {
       // }
     } catch (e) {
       debugPrint("Something went wrong while getting jadwal");
-      print(e);
+      // print(e);
     }
   }
 
@@ -108,7 +108,7 @@ class _HomePageState extends State<HomePage> {
       // }
     } catch (e) {
       debugPrint("Something went wrong while getting presensi");
-      print(e);
+      // print(e);
     }
   }
 
