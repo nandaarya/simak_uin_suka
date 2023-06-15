@@ -57,7 +57,6 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
         // Proses response atau lakukan operasi lain setelah POST berhasil
         var classCode = jsonData['data']['classCode'];
         debugPrint('Jadwal berhasil dipost');
-        print(jsonData);
         return classCode;
       } else {
         debugPrint(
@@ -65,7 +64,7 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
       }
     } catch (e) {
       debugPrint('Something went wrong while posting jadwal');
-      print(e);
+      // print(e);
     }
     return null;
   }
