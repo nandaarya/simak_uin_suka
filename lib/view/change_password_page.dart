@@ -83,8 +83,8 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
         return jsonData['message'];
       }
     } catch (e) {
-      print('Something went wrong while change password');
-      print(e);
+      debugPrint('Something went wrong while change password');
+      // print(e);
     }
     return null;
   }
