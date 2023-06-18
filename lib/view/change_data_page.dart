@@ -107,8 +107,8 @@ class _ChangeDataPageState extends State<ChangeDataPage> {
         return jsonData['message'];
       }
     } catch (e) {
-      print('Something went wrong while change user data');
-      print(e);
+      debugPrint('Something went wrong while change user data');
+      // print(e);
     }
     return null;
   }
