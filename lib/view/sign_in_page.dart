@@ -50,7 +50,7 @@ class _SignInPageState extends State<SignInPage> {
     debugPrint('Name: ${data.name}, Password: ${data.password}');
     try {
       var url =
-          Uri.parse('https://simak-back-end.cyclic.app/api/users/' + 'login');
+          Uri.parse('https://simak-back-end.cyclic.app/api/users/' 'login');
       var requestBody = json.encode({
         "username": data.name,
         "password": data.password,
@@ -62,9 +62,6 @@ class _SignInPageState extends State<SignInPage> {
           body: requestBody);
       var jsonData = json.decode(response.body);
       if (response.statusCode == 200) {
-        // print(jsonData['data']['user']['username']);
-        // print(jsonData['data']['user']['password']);
-        // print(jsonData['data']['user']['nama']);
         try {
           SharedPreferences prefs = await SharedPreferences.getInstance();
           prefs.setString('username', jsonData['data']['user']['username']);
@@ -84,7 +81,6 @@ class _SignInPageState extends State<SignInPage> {
           debugPrint('Error accessing SharedPreferences: $e');
         }
         debugPrint('Berhasil Login');
-        print(jsonData);
         return null;
       } else {
         debugPrint(
@@ -92,8 +88,8 @@ class _SignInPageState extends State<SignInPage> {
         return jsonData['message'];
       }
     } catch (e) {
-      print('Something went wrong while login');
-      print(e);
+      debugPrint('Something went wrong while login');
+      // print(e);
     }
     return null;
   }
@@ -111,7 +107,7 @@ class _SignInPageState extends State<SignInPage> {
         'Email: $email, Full Name: $fullName, NIM/NIP: $nimNip, Role: $role');
     try {
       var url = Uri.parse(
-          'https://simak-back-end.cyclic.app/api/users/' + 'register');
+          'https://simak-back-end.cyclic.app/api/users/' 'register');
       var requestBody = json.encode({
         "username": data.name,
         "password": data.password,
@@ -129,7 +125,6 @@ class _SignInPageState extends State<SignInPage> {
       if (response.statusCode == 201) {
         // Proses response atau lakukan operasi lain setelah POST berhasil;
         debugPrint('Akun berhasil ditambahkan');
-        print(jsonData);
         return null;
       } else {
         debugPrint(
@@ -137,8 +132,8 @@ class _SignInPageState extends State<SignInPage> {
         return jsonData['message'];
       }
     } catch (e) {
-      print('Something went wrong while adding user');
-      print(e);
+      debugPrint('Something went wrong while adding user');
+      // print(e);
     }
     return null;
   }
@@ -180,7 +175,7 @@ class _SignInPageState extends State<SignInPage> {
         UserFormField(
           keyName: 'email',
           displayName: 'Email',
-          icon: Icon(FontAwesomeIcons.envelope),
+          icon: const Icon(FontAwesomeIcons.envelope),
           fieldValidator: (value) {
             if (value == null || value.isEmpty) {
               return 'Masukkan email Anda!';
@@ -194,7 +189,7 @@ class _SignInPageState extends State<SignInPage> {
         UserFormField(
           keyName: 'fullName',
           displayName: 'Nama',
-          icon: Icon(FontAwesomeIcons.user),
+          icon: const Icon(FontAwesomeIcons.user),
           fieldValidator: (value) {
             if (value == null || value.isEmpty) {
               return 'Masukkan nama Anda!';
@@ -205,7 +200,7 @@ class _SignInPageState extends State<SignInPage> {
         UserFormField(
           keyName: 'nim_nip',
           displayName: 'NIM / NIP',
-          icon: Icon(FontAwesomeIcons.idCard),
+          icon: const Icon(FontAwesomeIcons.idCard),
           fieldValidator: (value) {
             if (value == null || value.isEmpty) {
               return 'Masukkan NIM/NIP Anda!';
@@ -216,7 +211,7 @@ class _SignInPageState extends State<SignInPage> {
         UserFormField(
           keyName: 'role',
           displayName: 'Status (mahasiswa/dosen)',
-          icon: Icon(FontAwesomeIcons.users),
+          icon: const Icon(FontAwesomeIcons.users),
           fieldValidator: (value) {
             if (value == null || value.isEmpty) {
               return 'Masukkan role Anda!';
