@@ -22,10 +22,10 @@ class _SplashPageState extends State<SplashPage> {
       ),
       backgroundColor: Colors.grey.shade400,
       showLoader: true,
-      loadingText: Text(
-        "Mengunduh Data...",
-        style: h2,
-      ),
+      // loadingText: Text(
+      //   "Mengunduh Data...",
+      //   style: h2,
+      // ),
       navigator: const SignInPage(),
     );
   }
