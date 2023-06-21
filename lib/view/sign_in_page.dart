@@ -7,12 +7,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simak_uin_suka/theme.dart';
 import 'package:simak_uin_suka/view/main_page.dart';
 
-const users = {
-  'mahasiswa@gmail.com': 'mahasiswa',
-  'dosen@gmail.com': 'dosen',
-  '21106050048': '21106050048'
-};
-
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
 
@@ -140,9 +134,9 @@ class _SignInPageState extends State<SignInPage> {
   Future<String?> _recoverPassword(String name) {
     debugPrint('Name: $name');
     return Future.delayed(loginTime).then((_) {
-      if (!users.containsKey(name)) {
-        return 'User not exists';
-      }
+      // if (!users.containsKey(name)) {
+      //   return 'User not exists';
+      // }
       return null;
     });
   }
