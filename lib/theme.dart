@@ -38,21 +38,3 @@ FontWeight regular = FontWeight.w400;
 FontWeight medium = FontWeight.w500;
 FontWeight semiBold = FontWeight.w600;
 FontWeight bold = FontWeight.w700;
-
-// Function failFlashBar = (BuildContext context, message) {
-//   Flushbar(
-//     message: message,
-//     duration: const Duration(seconds: 2),
-//     flushbarPosition: FlushbarPosition.TOP,
-//     backgroundColor: Colors.red,
-//   ).show(context);
-// };
-//
-// Function successFlashBar = (BuildContext context, message) {
-//   Flushbar(
-//     message: message,
-//     duration: Duration(seconds: 2),
-//     flushbarPosition: FlushbarPosition.TOP,
-//     backgroundColor: Colors.lightGreen,
-//   )..show(context);
-// };
