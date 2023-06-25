@@ -7,7 +7,7 @@ FrontEnd dari Aplikasi SIMAK UIN SUKA
 2. make attendance by scanning QR
 3. Make a class schedule
 
-# Soon
+# Features (Soon)
 1. View course details
 2. Attendance summary
 3. Grades summary
