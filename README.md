@@ -2,6 +2,9 @@
 
 FrontEnd dari Aplikasi SIMAK UIN SUKA
 
+# Show Case
+soon...
+
 # Features
 1. view the schedule list
 2. make attendance by scanning QR
@@ -11,3 +14,7 @@ FrontEnd dari Aplikasi SIMAK UIN SUKA
 1. View course details
 2. Attendance summary
 3. Grades summary
+
+# Tech Stack
+
+
