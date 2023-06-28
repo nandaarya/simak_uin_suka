@@ -16,5 +16,6 @@ soon...
 3. Grades summary
 
 # Tech Stack
+Database: MongoDB
 
 
