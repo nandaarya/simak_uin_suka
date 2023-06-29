@@ -17,5 +17,6 @@ soon...
 
 # Tech Stack
 Database: MongoDB
-
+Design Pattern: -
+State Management: -
 
