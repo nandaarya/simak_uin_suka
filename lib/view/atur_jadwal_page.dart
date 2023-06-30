@@ -79,7 +79,6 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
       body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.all(defaultMargin),
-          // padding: EdgeInsets.all(defaultPadding),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -107,7 +106,6 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
                   // This is called when the user selects an item.
                   setState(() {
                     dropdownClassValue = value!;
-                    // print(dropdownClassValue);
                   });
                 },
               ),

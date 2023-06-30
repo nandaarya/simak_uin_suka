@@ -77,7 +77,6 @@ class _QRScannerState extends State<QRScanner> {
       }
     } catch (e) {
       debugPrint('Something went wrong while posting presensi');
-      // print(e);
     }
     return null;
   }
