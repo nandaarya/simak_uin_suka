@@ -103,7 +103,6 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
                   );
                 }).toList(),
                 onChanged: (String? value) {
-                  // This is called when the user selects an item.
                   setState(() {
                     dropdownClassValue = value!;
                   });
