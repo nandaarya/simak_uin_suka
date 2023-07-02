@@ -233,7 +233,6 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
                             .toString(),
                         room: ruangController.text,
                       );
-                      // value is classCode From Response POST
                       postJadwal(jadwal).then((value) {
                         Navigator.push(
                           context,
