@@ -67,16 +67,6 @@ class _HomePageState extends State<HomePage> {
       setState(() {
         isLoading = false;
       });
-      // for (var jadwal in jadwalList) {
-      //   print('classCode: ${jadwal.classCode}');
-      //   print('className: ${jadwal.className}');
-      //   print('lecturer: ${jadwal.lecturer}');
-      //   print('material: ${jadwal.material}');
-      //   print('startedAt: ${jadwal.startedAt}');
-      //   print('finishAt: ${jadwal.finishAt}');
-      //   print('room: ${jadwal.room}');
-      //   print('--------------');
-      // }
     } catch (e) {
       debugPrint("Something went wrong while getting jadwal");
       // print(e);
