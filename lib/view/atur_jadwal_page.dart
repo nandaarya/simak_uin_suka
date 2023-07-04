@@ -89,7 +89,6 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
               DropdownButton<String>(
                 isExpanded: true,
                 value: dropdownClassValue,
-                // icon: const Icon(Icons.arrow_downward),
                 elevation: 8,
                 style: h3b,
                 underline: Container(
@@ -218,7 +217,6 @@ class GenerateQRCodeState extends State<GenerateQRCode> {
                 child: ElevatedButton(
                     onPressed: () {
                       JadwalModel jadwal = JadwalModel(
-                        // classCode from response POST
                         classCode: '',
                         className: dropdownClassValue,
                         lecturer: 'Dosen',
