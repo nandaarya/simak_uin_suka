@@ -16,7 +16,7 @@ soon...
 3. Grades summary
 
 # Tech Stack
-Database: MongoDB
-Design Pattern: -
+Database: MongoDB <br>
+Design Pattern: - <br>
 State Management: -
 
