@@ -7,10 +7,10 @@ Application to assist the process of scheduling and attendance at the university
 
 <img src="README-Screenshot/5.jpg" alt="Homescreen" width="200px" /> <img src="README-Screenshot/6.jpg" alt="Profilescreen" width="200px" />
 
-Attendance with QR Code Scanning (For Student user)
+Attendance with QR Code Scanning (For Student user) <br>
 <img src="README-Screenshot/7.jpg" alt="ScanQRscreen" width="200px" />
 
-Create schedule for class (For Lecturer user)
+Create schedule for class (For Lecturer user) <br>
 <img src="README-Screenshot/8.jpg" alt="Schedulescreen" width="200px" /> <img src="README-Screenshot/9.jpg" alt="QRscreen" width="200px" />
 
 # Features
